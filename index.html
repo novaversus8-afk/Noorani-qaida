@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#087f70">
+
+<title>Noorani Qaida & Quran</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Devanagari",sans-serif;
+  background:#f3f7f6;
+  color:#183c39;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.header{
+  background:linear-gradient(135deg,#087f70,#009c89);
+  color:white;
+  padding:22px 16px 12px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 12px #0002;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:700;
+}
+
+.subtitle{
+  margin-top:7px;
+  font-size:15px;
+  opacity:.95;
+  line-height:1.7;
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-top:14px;
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{
+  display:none;
+}
+
+.nav button{
+  flex:0 0 auto;
+  background:#ffffff22;
+  color:white;
+  padding:11px 17px;
+  border-radius:30px;
+}
+
+.nav button.active{
+  background:white;
+  color:#087f70;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 14px 80px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 3px 15px #16443c12;
+}
+
+.hero{
+  background:linear-gradient(135deg,#e0f7f3,#ffffff);
+}
+
+h1,h2,h3{
+  margin-top:0;
+}
+
+.search{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #d6e5e2;
+  border-radius:14px;
+  outline:none;
+  background:white;
+}
+
+.search:focus{
+  border-color:#078878;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+
+.surah-btn,
+.lesson-btn{
+  background:#e2f3f0;
+  color:#075e54;
+  border-radius:15px;
+  padding:15px;
+  text-align:left;
+  min-height:72px;
+}
+
+.surah-btn strong{
+  display:block;
+  font-size:17px;
+}
+
+.surah-btn small{
+  display:block;
+  margin-top:5px;
+  opacity:.8;
+}
+
+.badge{
+  display:inline-block;
+  background:#087f70;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
+
+.btn{
+  background:#087f70;
+  color:white;
+  border-radius:12px;
+  padding:11px 15px;
+}
+
+.btn.secondary{
+  background:#e4f2f0;
+  color:#075e54;
+}
+
+.btn.danger{
+  background:#b42318;
+}
+
+.my-voice{
+  background:linear-gradient(135deg,#075e54,#087f70);
+  color:white;
+  border-radius:14px;
+  padding:13px 17px;
+  font-weight:bold;
+  box-shadow:0 4px 12px #087f7033;
+}
+
+.my-voice-small{
+  background:#e4f2f0;
+  color:#075e54;
+  border-radius:12px;
+  padding:10px 14px;
+}
+
+.voice-box{
+  background:linear-gradient(135deg,#e1f7f3,#ffffff);
+  border-left:5px solid #087f70;
+  border-radius:16px;
+  padding:16px;
+  margin:15px 0;
+}
+
+.voice-box h3{
+  margin-bottom:7px;
+  color:#075e54;
+}
+
+.voice-status{
+  font-size:13px;
+  margin-top:8px;
+  color:#617572;
+}
+
+.quran-box{
+  margin-top:15px;
+}
+
+.ayah{
+  background:#fff;
+  border-radius:18px;
+  padding:20px 16px;
+  margin:12px 0;
+  box-shadow:0 2px 10px #0000000b;
+}
+
+.ayah-no{
+  display:inline-flex;
+  width:34px;
+  height:34px;
+  align-items:center;
+  justify-content:center;
+  background:#087f70;
+  color:white;
+  border-radius:50%;
+  font-size:13px;
+}
+
+.arabic{
+  direction:rtl;
+  text-align:right;
+  font-family:"Amiri","Scheherazade New","Noto Naskh Arabic",serif;
+  font-size:30px;
+  line-height:2.1;
+  margin:12px 0;
+  color:#172d2a;
+}
+
+.trans{
+  padding:11px;
+  margin-top:8px;
+  border-radius:10px;
+  background:#f4f8f7;
+  line-height:1.7;
+}
+
+.hindi{
+  border-left:4px solid #ef9d20;
+}
+
+.english{
+  border-left:4px solid #3484d8;
+}
+
+.trans-title{
+  font-weight:bold;
+  margin-bottom:5px;
+  color:#087f70;
+}
+
+.loader{
+  text-align:center;
+  padding:35px 15px;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  margin:10px auto;
+  border:4px solid #d9efeb;
+  border-top-color:#087f70;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.notice{
+  padding:14px;
+  border-radius:14px;
+  background:#fff5d9;
+  color:#765300;
+  margin:12px 0;
+}
+
+.error{
+  background:#ffe8e8;
+  color:#9c2525;
+}
+
+.success{
+  background:#e4f8ee;
+  color:#17613c;
+}
+
+.lesson{
+  border:1px solid #dbece8;
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:12px;
+  background:white;
+}
+
+.lesson h3{
+  color:#087f70;
+}
+
+.arabic-large{
+  direction:rtl;
+  text-align:center;
+  font-family:"Amiri","Noto Naskh Arabic",serif;
+  font-size:42px;
+  line-height:2;
+  padding:12px;
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table th,
+.table td{
+  padding:11px;
+  border-bottom:1px solid #e2e9e7;
+  text-align:left;
+}
+
+.table th{
+  background:#e9f5f2;
+}
+
+.chat{
+  max-height:400px;
+  overflow:auto;
+  padding:5px;
+}
+
+.msg{
+  padding:12px 14px;
+  margin:8px 0;
+  border-radius:14px;
+  line-height:1.6;
+}
+
+.bot{
+  background:#e9f5f2;
+}
+
+.user{
+  background:#087f70;
+  color:white;
+  margin-left:35px;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+}
+
+.chat-input input{
+  flex:1;
+  border:1px solid #d7e4e1;
+  border-radius:12px;
+  padding:12px;
+}
+
+.footer{
+  text-align:center;
+  padding:30px 15px;
+  color:#71817e;
+}
+
+.progress{
+  height:8px;
+  background:#dcebe8;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress div{
+  height:100%;
+  width:0%;
+  background:#087f70;
+  transition:.3s;
+}
+
+/* Floating Voice Button */
+
+.floating-voice{
+  position:fixed;
+  right:16px;
+  bottom:18px;
+  z-index:200;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:#087f70;
+  color:white;
+  font-size:25px;
+  box-shadow:0 5px 20px #0004;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.floating-voice.playing{
+  animation:pulseVoice 1s infinite;
+}
+
+@keyframes pulseVoice{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.12);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+@media(max-width:600px){
+
+  .logo{
+    font-size:24px;
+  }
+
+  .arabic{
+    font-size:27px;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .header{
+    padding-top:18px;
+  }
+}
+
+@media(max-width:390px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    📖 Noorani Qaida & Quran
+  </div>
+
+  <div class="subtitle">
+    Qaida • Quran • Juz Amma • Namaz • Roza • Hadith • Al Ustad
+  </div>
+
+  <div class="nav">
+
+    <button class="active" onclick="showPage('home',this)">
+      🏠 Home
+    </button>
+
+    <button onclick="showPage('qaida',this)">
+      📚 Qaida
+    </button>
+
+    <button onclick="showPage('quran',this)">
+      📖 Quran
+    </button>
+
+    <button onclick="showPage('amma',this)">
+      🌙 Juz Amma
+    </button>
+
+    <button onclick="showPage('namaz',this)">
+      🕌 Namaz
+    </button>
+
+    <button onclick="showPage('roza',this)">
+      🌙 Roza
+    </button>
+
+    <button onclick="showPage('hadith',this)">
+      📜 Hadith
+    </button>
+
+    <button onclick="showPage('ustad',this)">
+      🤖 Al Ustad
+    </button>
+
+  </div>
+</header>
+
+
+<div class="container">
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+  <div class="card hero">
+
+    <h1>
+      بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+    </h1>
+
+    <h2>
+      Noorani Qaida & Quran Learning
+    </h2>
+
+    <p>
+      Quran को Arabic में पढ़ें, Hindi और English meaning देखें,
+      सुनें और सीखें।
+    </p>
+
+    <!-- USER VOICE -->
+
+    <div class="voice-box">
+
+      <h3>
+        🎙️ आपको आवाज़
+      </h3>
+
+      <p>
+        नीचे बटन दबाकर आपकी recording सुनें।
+      </p>
+
+      <button
+        class="my-voice"
+        onclick="playMyVoice()"
+      >
+        🔊 मेरी आवाज सुनें
+      </button>
+
+      <div
+        id="voiceStatus"
+        class="voice-status"
+      >
+        आपकी आवाज़: 123.mp3
+      </div>
+
+    </div>
+
+
+    <div class="controls">
+
+      <button
+        class="btn"
+        onclick="showPage('quran')"
+      >
+        📖 Quran खोलें
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="showPage('qaida')"
+      >
+        📚 Qaida सीखें
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="showPage('amma')"
+      >
+        🌙 Juz Amma
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      📌 Quran Loading Status
+    </h2>
+
+    <div
+      id="statusBox"
+      class="notice"
+    >
+      Quran data तैयार किया जा रहा है...
+    </div>
+
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      ⭐ मुख्य सुविधाएँ
+    </h2>
+
+    <div class="grid">
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('quran')"
+      >
+        📖 पूरा Quran
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('amma')"
+      >
+        🌙 पूरा Juz Amma
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('qaida')"
+      >
+        📚 Noorani Qaida
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('namaz')"
+      >
+        🕌 Namaz
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('roza')"
+      >
+        🌙 Roza
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('hadith')"
+      >
+        📜 Hadith
+      </button>
+
+      <button
+        class="lesson-btn"
+        onclick="showPage('ustad')"
+      >
+        🤖 AI Ustad
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= QAIDA ================= -->
+
+<section id="qaida" class="page">
+
+  <div class="card">
+
+    <h2>
+      📚 Noorani Qaida
+    </h2>
+
+    <p>
+      Arabic letters से लेकर Tajweed और Quran reading तक
+      step-by-step learning.
+    </p>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+  </div>
+
+  <div
+    id="qaidaLessons"
+  ></div>
+
+</section>
+
+
+<!-- ================= QURAN ================= -->
+
+<section id="quran" class="page">
+
+  <div class="card">
+
+    <h2>
+      📖 पूरा Quran
+    </h2>
+
+    <p>
+      1 से 114 तक सभी Surah.
+    </p>
+
+    <div class="controls">
+
+      <button
+        class="my-voice"
+        onclick="playMyVoice()"
+      >
+        🎙️ मेरी आवाज
+      </button>
+
+    </div>
+
+    <input
+      class="search"
+      id="surahSearch"
+      placeholder="Surah खोजें..."
+      oninput="renderSurahList()"
+    >
+
+  </div>
+
+  <div
+    id="surahList"
+    class="grid"
+  ></div>
+
+  <div
+    id="quranReader"
+  ></div>
+
+</section>
+
+
+<!-- ================= AMMA ================= -->
+
+<section id="amma" class="page">
+
+  <div class="card">
+
+    <h2>
+      🌙 Juz Amma — 30वाँ पारा
+    </h2>
+
+    <p>
+      Surah An-Naba से Surah An-Naas तक।
+    </p>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+    <div
+      id="ammaList"
+      class="grid"
+      style="margin-top:15px"
+    ></div>
+
+  </div>
+
+  <div
+    id="ammaReader"
+  ></div>
+
+</section>
+
+
+<!-- ================= NAMAZ ================= -->
+
+<section id="namaz" class="page">
+
+  <div class="card">
+
+    <h2>
+      🕌 Namaz Learning
+    </h2>
+
+    <p>
+      Namaz सीखने के लिए basic क्रम।
+    </p>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+  </div>
+
+  <div
+    id="namazContent"
+  ></div>
+
+</section>
+
+
+<!-- ================= ROZA ================= -->
+
+<section id="roza" class="page">
+
+  <div class="card">
+
+    <h2>
+      🌙 Roza / Fasting
+    </h2>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+  </div>
+
+  <div
+    id="rozaContent"
+  ></div>
+
+</section>
+
+
+<!-- ================= HADITH ================= -->
+
+<section id="hadith" class="page">
+
+  <div class="card">
+
+    <h2>
+      📜 Hadith & Islamic Learning
+    </h2>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+  </div>
+
+  <div
+    id="hadithContent"
+  ></div>
+
+</section>
+
+
+<!-- ================= USTAD ================= -->
+
+<section id="ustad" class="page">
+
+  <div class="card">
+
+    <h2>
+      🤖 Al Ustad
+    </h2>
+
+    <p>
+      Quran, Qaida, Namaz, Roza और basic Islamic learning
+      के बारे में सवाल पूछें।
+    </p>
+
+    <button
+      class="my-voice"
+      onclick="playMyVoice()"
+    >
+      🎙️ मेरी आवाज सुनें
+    </button>
+
+    <div
+      id="chat"
+      class="chat"
+    >
+
+      <div class="msg bot">
+
+        السلام عليكم ورحمة الله وبركاته 🌙
+
+        <br><br>
+
+        मैं Al Ustad हूँ। Quran, Qaida, Namaz या Roza के बारे में
+        सवाल पूछिए।
+
+      </div>
+
+    </div>
+
+    <div class="chat-input">
+
+      <input
+        id="question"
+        placeholder="अपना सवाल लिखिए..."
+        onkeydown="if(event.key==='Enter')askUstad()"
+      >
+
+      <button
+        class="btn"
+        onclick="askUstad()"
+      >
+        पूछें
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+
+  © 2026 Noorani Qaida & Quran Learning
+
+</div>
+
+</div>
+
+
+<!-- ================= FLOATING VOICE ================= -->
+
+<button
+  id="floatingVoice"
+  class="floating-voice"
+  onclick="playMyVoice()"
+  title="मेरी आवाज सुनें"
+>
+  🎙️
+</button>
+
+
+<!-- ================= YOUR AUDIO ================= -->
+
+<audio
+  id="myVoiceAudio"
+  preload="auto"
+  src="123.mp3"
+></audio>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const API =
+  "https://api.alquran.cloud/v1";
+
+const ARABIC_EDITION =
+  "quran-uthmani";
+
+const ENGLISH_EDITION =
+  "en.sahih";
+
+const HINDI_EDITION =
+  "hi.farooq";
+
+const AUDIO_EDITION =
+  "ar.alafasy";
+
+const AUDIO_BASE =
+  "https://cdn.islamic.network/quran/audio/128/"
+  + AUDIO_EDITION
+  + "/";
+
+
+/* =========================================================
+   YOUR PERSONAL VOICE
+========================================================= */
+
+const MY_VOICE_FILE =
+  "123.mp3";
+
+let myVoiceAudio =
+  document.getElementById(
+    "myVoiceAudio"
+  );
+
+
+function playMyVoice(){
+
+  if(!myVoiceAudio){
+
+    alert(
+      "123.mp3 audio element नहीं मिला।"
+    );
+
+    return;
+  }
+
+  myVoiceAudio.src =
+    MY_VOICE_FILE;
+
+  myVoiceAudio.currentTime =
+    0;
+
+  const status =
+    document.getElementById(
+      "voiceStatus"
+    );
+
+  const floating =
+    document.getElementById(
+      "floatingVoice"
+    );
+
+  myVoiceAudio.play()
+    .then(()=>{
+
+      if(status){
+
+        status.innerHTML =
+          "🔊 आपकी आवाज़ चल रही है...";
+
+      }
+
+      if(floating){
+
+        floating.classList.add(
+          "playing"
+        );
+
+      }
+
+    })
+    .catch(error=>{
+
+      console.error(error);
+
+      if(status){
+
+        status.innerHTML =
+          "❌ 123.mp3 नहीं मिली। index.html के साथ उसी folder में रखें।";
+
+      }
+
+      alert(
+        "123.mp3 नहीं मिली। इसे index.html के साथ उसी folder में upload करें।"
+      );
+
+    });
+
+}
+
+
+myVoiceAudio.addEventListener(
+  "ended",
+  ()=>{
+
+    const status =
+      document.getElementById(
+        "voiceStatus"
+      );
+
+    const floating =
+      document.getElementById(
+        "floatingVoice"
+      );
+
+    if(status){
+
+      status.innerHTML =
+        "✅ आपकी आवाज़ तैयार है।";
+
+    }
+
+    if(floating){
+
+      floating.classList.remove(
+        "playing"
+      );
+
+    }
+
+  }
+);
+
+
+myVoiceAudio.addEventListener(
+  "error",
+  ()=>{
+
+    const status =
+      document.getElementById(
+        "voiceStatus"
+      );
+
+    if(status){
+
+      status.innerHTML =
+        "❌ 123.mp3 नहीं मिली।";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let quranArabic = null;
+let quranEnglish = null;
+let quranHindi = null;
+
+let surahs = [];
+
+let currentSurah = null;
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(id,button){
+
+  document.querySelectorAll(".page")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+  const page =
+    document.getElementById(id);
+
+  if(page){
+
+    page.classList.add("active");
+
+  }
+
+  if(button){
+
+    document.querySelectorAll(
+      ".nav button"
+    )
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+  }
+
+  if(id === "quran"){
+
+    renderSurahList();
+
+  }
+
+  if(id === "amma"){
+
+    renderAmma();
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   FETCH JSON
+========================================================= */
+
+async function getJSON(url){
+
+  const response =
+    await fetch(
+      url,
+      {
+        cache:"default"
+      }
+    );
+
+  if(!response.ok){
+
+    throw new Error(
+      "HTTP " +
+      response.status
+    );
+
+  }
+
+  const json =
+    await response.json();
+
+  if(json.code !== 200){
+
+    throw new Error(
+      json.status ||
+      "API Error"
+    );
+
+  }
+
+  return json.data;
+
+}
+
+
+/* =========================================================
+   LOAD QURAN
+========================================================= */
+
+async function loadQuran(){
+
+  const status =
+    document.getElementById(
+      "statusBox"
+    );
+
+  try{
+
+    status.className =
+      "notice";
+
+    status.innerHTML =
+      "⏳ Arabic Quran load हो रहा है...";
+
+
+    let cached =
+      localStorage.getItem(
+        "NOORANI_QURAN_AR"
+      );
+
+
+    if(cached){
+
+      quranArabic =
+        JSON.parse(cached);
+
+    }else{
+
+      quranArabic =
+        await getJSON(
+          API +
+          "/quran/" +
+          ARABIC_EDITION
+        );
+
+      try{
+
+        localStorage.setItem(
+          "NOORANI_QURAN_AR",
+          JSON.stringify(
+            quranArabic
+          )
+        );
+
+      }catch(e){}
+
+    }
+
+
+    document.getElementById(
+      "progressBar"
+    ).style.width =
+      "33%";
+
+
+    status.innerHTML =
+      "⏳ English translation load हो रहा है...";
+
+
+    cached =
+      localStorage.getItem(
+        "NOORANI_QURAN_EN"
+      );
+
+
+    if(cached){
+
+      quranEnglish =
+        JSON.parse(cached);
+
+    }else{
+
+      quranEnglish =
+        await getJSON(
+          API +
+          "/quran/" +
+          ENGLISH_EDITION
+        );
+
+      try{
+
+        localStorage.setItem(
+          "NOORANI_QURAN_EN",
+          JSON.stringify(
+            quranEnglish
+          )
+        );
+
+      }catch(e){}
+
+    }
+
+
+    document.getElementById(
+      "progressBar"
+    ).style.width =
+      "66%";
+
+
+    status.innerHTML =
+      "⏳ Hindi translation load हो रहा है...";
+
+
+    cached =
+      localStorage.getItem(
+        "NOORANI_QURAN_HI"
+      );
+
+
+    if(cached){
+
+      quranHindi =
+        JSON.parse(cached);
+
+    }else{
+
+      quranHindi =
+        await getJSON(
+          API +
+          "/quran/" +
+          HINDI_EDITION
+        );
+
+      try{
+
+        localStorage.setItem(
+          "NOORANI_QURAN_HI",
+          JSON.stringify(
+            quranHindi
+          )
+        );
+
+      }catch(e){}
+
+    }
+
+
+    document.getElementById(
+      "progressBar"
+    ).style.width =
+      "100%";
+
+
+    surahs =
+      quranArabic.surahs ||
+      [];
+
+
+    status.className =
+      "notice success";
+
+    status.innerHTML =
+      "✅ पूरा Quran तैयार है — 114 Surah उपलब्ध हैं।";
+
+
+    renderSurahList();
+
+    renderAmma();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    status.className =
+      "notice error";
+
+    status.innerHTML =
+      "❌ Quran load नहीं हुआ।<br><br>" +
+      "Internet connection check करके page दोबारा खोलें।" +
+      "<br><br>" +
+      "Error: " +
+      escapeHTML(
+        error.message
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   SURAH LIST
+========================================================= */
+
+function renderSurahList(){
+
+  const box =
+    document.getElementById(
+      "surahList"
+    );
+
+  if(!box) return;
+
+
+  const search =
+    (
+      document.getElementById(
+        "surahSearch"
+      )?.value || ""
+    ).toLowerCase();
+
+
+  if(!surahs.length){
+
+    box.innerHTML =
+      "<div class='card'>" +
+      "Quran अभी load हो रहा है..." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  const filtered =
+    surahs.filter(
+      s=>{
+
+        const text =
+          (
+            s.number +
+            " " +
+            s.name +
+            " " +
+            s.englishName +
+            " " +
+            s.englishNameTranslation
+          ).toLowerCase();
+
+        return text.includes(
+          search
+        );
+
+      }
+    );
+
+
+  box.innerHTML =
+    filtered.map(
+      s=>`
+
+      <button
+        class="surah-btn"
+        onclick="openSurah(${s.number})"
+      >
+
+        <strong>
+          ${s.number}.
+          ${escapeHTML(s.englishName)}
+        </strong>
+
+        <small>
+          ${escapeHTML(s.name)}
+        </small>
+
+        <small>
+          ${s.numberOfAyahs} Ayahs
+        </small>
+
+      </button>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   OPEN SURAH
+========================================================= */
+
+function openSurah(number){
+
+  currentSurah =
+    surahs.find(
+      s =>
+        s.number === number
+    );
+
+
+  if(!currentSurah) return;
+
+
+  const reader =
+    document.getElementById(
+      "quranReader"
+    );
+
+
+  reader.innerHTML =
+    `<div class="card">
+
+      <h2>
+        ${currentSurah.number}.
+        ${escapeHTML(
+          currentSurah.englishName
+        )}
+      </h2>
+
+      <div class="arabic-large">
+        ${escapeHTML(
+          currentSurah.name
+        )}
+      </div>
+
+      <div class="controls">
+
+        <button
+          class="btn"
+          onclick="playSurah(${number})"
+        >
+          🔊 पूरी Surah सुनें
+        </button>
+
+        <button
+          class="my-voice-small"
+          onclick="playMyVoice()"
+        >
+          🎙️ मेरी आवाज
+        </button>
+
+        <button
+          class="btn secondary"
+          onclick="
+            speakText(
+              document.getElementById(
+                'surahReaderText'
+              ).innerText,
+              'ar-SA'
+            )
+          "
+        >
+          🗣️ Voice
+        </button>
+
+      </div>
+
+      <div
+        id="surahReaderText"
+      ></div>
+
+    </div>`;
+
+
+  const ar =
+    quranArabic.surahs[
+      number - 1
+    ];
+
+
+  const en =
+    quranEnglish?.surahs?.[
+      number - 1
+    ];
+
+
+  const hi =
+    quranHindi?.surahs?.[
+      number - 1
+    ];
+
+
+  const textBox =
+    document.getElementById(
+      "surahReaderText"
+    );
+
+
+  if(!ar){
+
+    textBox.innerHTML =
+      "<div class='notice error'>" +
+      "Surah data उपलब्ध नहीं है।" +
+      "</div>";
+
+    return;
+
+  }
+
+
+  textBox.innerHTML =
+    ar.ayahs.map(
+      (ayah,index)=>{
+
+        const enText =
+          en?.ayahs?.[
+            index
+          ]?.text || "";
+
+
+        const hiText =
+          hi?.ayahs?.[
+            index
+          ]?.text || "";
+
+
+        return createAyahHTML(
+          ayah,
+          enText,
+          hiText
+        );
+
+      }
+    ).join("");
+
+
+  document.getElementById(
+    "quranReader"
+  ).scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   AYAH HTML
+========================================================= */
+
+function createAyahHTML(
+  ayah,
+  english,
+  hindi
+){
+
+  return `
+
+  <article class="ayah">
+
+    <div>
+
+      <span class="ayah-no">
+        ${ayah.numberInSurah}
+      </span>
+
+      <button
+        class="btn secondary"
+        style="float:right"
+        onclick="playAyah(${ayah.number})"
+      >
+        🔊
+      </button>
+
+      <button
+        class="btn secondary"
+        style="float:right;margin-right:5px"
+        onclick="
+          speakText(
+            document.getElementById(
+              'ar-${ayah.number}'
+            ).innerText,
+            'ar-SA'
+          )
+        "
+      >
+        🗣️
+      </button>
+
+    </div>
+
+
+    <div
+      id="ar-${ayah.number}"
+      class="arabic"
+    >
+      ${escapeHTML(
+        ayah.text
+      )}
+    </div>
+
+
+    <div class="trans english">
+
+      <div class="trans-title">
+        🇬🇧 English
+      </div>
+
+      ${escapeHTML(
+        english
+      )}
+
+    </div>
+
+
+    <div class="trans hindi">
+
+      <div class="trans-title">
+        🇮🇳 हिन्दी
+      </div>
+
+      ${escapeHTML(
+        hindi
+      )}
+
+    </div>
+
+  </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   PLAY AYAH
+========================================================= */
+
+function playAyah(
+  globalAyahNumber
+){
+
+  const audio =
+    new Audio(
+      AUDIO_BASE +
+      globalAyahNumber +
+      ".mp3"
+    );
+
+
+  audio.play()
+    .catch(()=>{
+
+      alert(
+        "Quran audio के लिए Internet connection जरूरी है।"
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   PLAY SURAH
+========================================================= */
+
+function playSurah(number){
+
+  const surah =
+    quranArabic?.surahs?.[
+      number - 1
+    ];
+
+
+  if(!surah) return;
+
+
+  let index = 0;
+
+
+  function next(){
+
+    if(
+      index >=
+      surah.ayahs.length
+    ){
+
+      return;
+
+    }
+
+
+    const ayah =
+      surah.ayahs[
+        index++
+      ];
+
+
+    const audio =
+      new Audio(
+        AUDIO_BASE +
+        ayah.number +
+        ".mp3"
+      );
+
+
+    audio.onended =
+      next;
+
+
+    audio.onerror =
+      next;
+
+
+    audio.play()
+      .catch(()=>{
+
+        alert(
+          "Recitation के लिए Internet जरूरी है।"
+        );
+
+      });
+
+  }
+
+
+  next();
+
+}
+
+
+/* =========================================================
+   JUZ AMMA
+========================================================= */
+
+function renderAmma(){
+
+  const box =
+    document.getElementById(
+      "ammaList"
+    );
+
+
+  if(!box) return;
+
+
+  if(!surahs.length){
+
+    box.innerHTML =
+      "<div class='card'>" +
+      "Quran loading..." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  const amma =
+    surahs.filter(
+      s =>
+        s.number >= 78
+    );
+
+
+  box.innerHTML =
+    amma.map(
+      s=>`
+
+      <button
+        class="surah-btn"
+        onclick="openAmmaSurah(${s.number})"
+      >
+
+        <strong>
+          ${s.number}.
+          ${escapeHTML(
+            s.englishName
+          )}
+        </strong>
+
+        <small>
+          ${escapeHTML(
+            s.name
+          )}
+        </small>
+
+        <small>
+          ${s.numberOfAyahs} Ayahs
+        </small>
+
+      </button>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   OPEN AMMA SURAH
+========================================================= */
+
+function openAmmaSurah(
+  number
+){
+
+  const ar =
+    quranArabic?.surahs?.[
+      number - 1
+    ];
+
+
+  const en =
+    quranEnglish?.surahs?.[
+      number - 1
+    ];
+
+
+  const hi =
+    quranHindi?.surahs?.[
+      number - 1
+    ];
+
+
+  if(!ar) return;
+
+
+  const box =
+    document.getElementById(
+      "ammaReader"
+    );
+
+
+  box.innerHTML =
+    `<div class="card">
+
+      <h2>
+        ${number}.
+        ${escapeHTML(
+          ar.englishName
+        )}
+      </h2>
+
+      <div class="controls">
+
+        <button
+          class="btn"
+          onclick="playSurah(${number})"
+        >
+          🔊 Surah सुनें
+        </button>
+
+        <button
+          class="my-voice-small"
+          onclick="playMyVoice()"
+        >
+          🎙️ मेरी आवाज
+        </button>
+
+      </div>
+
+      ${ar.ayahs.map(
+        (ayah,i)=>
+          createAyahHTML(
+            ayah,
+            en?.ayahs?.[
+              i
+            ]?.text || "",
+            hi?.ayahs?.[
+              i
+            ]?.text || ""
+          )
+      ).join("")}
+
+    </div>`;
+
+
+  box.scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   NOORANI QAIDA
+========================================================= */
+
+const qaidaLessons = [
+
+{
+title:"Lesson 1 — Arabic Letters",
+arabic:"ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن و ه ء ي",
+hindi:"अरबी के मूल अक्षरों की पहचान और सही आवाज़।",
+english:"Learn to recognize Arabic letters and their basic sounds."
+},
+
+{
+title:"Lesson 2 — Letter Shapes",
+arabic:"بـ ـبـ ـب ب   تـ ـتـ ـت ت",
+hindi:"शुरू, बीच और अंत में अक्षर का रूप पहचानें।",
+english:"Learn how Arabic letters change shape by position."
+},
+
+{
+title:"Lesson 3 — Harakat / Zabar",
+arabic:"بَ تَ جَ حَ خَ دَ رَ",
+hindi:"ज़बर से छोटी 'a' आवाज़ निकलती है।",
+english:"Fathah gives a short 'a' sound."
+},
+
+{
+title:"Lesson 4 — Zer",
+arabic:"بِ تِ جِ حِ خِ دِ رِ",
+hindi:"ज़ेर से छोटी 'i' आवाज़ आती है।",
+english:"Kasrah gives a short 'i' sound."
+},
+
+{
+title:"Lesson 5 — Pesh",
+arabic:"بُ تُ جُ حُ خُ دُ رُ",
+hindi:"पेश से छोटी 'u' आवाज़ आती है।",
+english:"Dammah gives a short 'u' sound."
+},
+
+{
+title:"Lesson 6 — Tanween",
+arabic:"بً بٍ بٌ   تً تٍ تٌ",
+hindi:"दो ज़बर, दो ज़ेर और दो पेश को तनवीन कहते हैं।",
+english:"Double vowel marks are called Tanween."
+},
+
+{
+title:"Lesson 7 — Madd",
+arabic:"بَا بِي بُو   قَالَ يَقُولُ",
+hindi:"मद्द में आवाज़ को निर्धारित मात्रा तक खींचा जाता है।",
+english:"Madd means lengthening the vowel according to the rule."
+},
+
+{
+title:"Lesson 8 — Sukoon",
+arabic:"أَبْ أَجْ أَحْ أَخْ",
+hindi:"सुकून वाले अक्षर पर हरकत नहीं होती।",
+english:"Sukoon indicates that the consonant has no vowel."
+},
+
+{
+title:"Lesson 9 — Shaddah",
+arabic:"إِنَّ رَبَّنَا ثُمَّ",
+hindi:"शद्दा अक्षर को जोर और दोहरी pronunciation के साथ पढ़ने का नियम है।",
+english:"Shaddah indicates a doubled consonant."
+},
+
+{
+title:"Lesson 10 — Qalqalah",
+arabic:"ق ط ب ج د",
+hindi:"क़ल्क़ला के अक्षर: ق ط ب ج د।",
+english:"The five Qalqalah letters are Qaf, Ta, Ba, Jim and Dal."
+},
+
+{
+title:"Lesson 11 — Noon Saakin & Tanween",
+arabic:"مِنْ أَنْعَمْتَ سَمِيعٌ عَلِيمٌ",
+hindi:"नून साकिन और तनवीन के नियम सीखें।",
+english:"Learn the rules governing Noon Saakin and Tanween."
+},
+
+{
+title:"Lesson 12 — Idgham",
+arabic:"مِنْ رَبِّهِمْ   مَنْ يَقُولُ",
+hindi:"कुछ स्थितियों में नून साकिन अगले अक्षर में मिल जाता है।",
+english:"Idgham means merging according to Tajweed rules."
+},
+
+{
+title:"Lesson 13 — Ikhfa",
+arabic:"مِنْ شَرِّ   أَنْفُسِكُمْ",
+hindi:"इख़्फ़ा में आवाज़ को छुपाकर नाक की गूंज के साथ पढ़ा जाता है।",
+english:"Ikhfa is partial concealment with nasalization."
+},
+
+{
+title:"Lesson 14 — Iqlab",
+arabic:"أَنْبِئْهُمْ",
+hindi:"नून साकिन/तनवीन के बाद ب आने पर इक़लाब का नियम लागू होता है।",
+english:"Iqlab changes Noon sound toward a Meem sound before Ba."
+},
+
+{
+title:"Lesson 15 — Meem Saakin",
+arabic:"تَرْمِيهِمْ بِحِجَارَةٍ",
+hindi:"मीम साकिन के विशेष Tajweed rules।",
+english:"Learn the rules of Meem Saakin."
+},
+
+{
+title:"Lesson 16 — Waqf",
+arabic:"وَالضُّحَىٰ ۝ وَاللَّيْلِ",
+hindi:"रुकने और दोबारा शुरू करने के नियम।",
+english:"Learn correct stopping and starting points."
+},
+
+{
+title:"Lesson 17 — Tajweed Practice",
+arabic:"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+hindi:"अब सभी नियमों को Quran reading में practice करें।",
+english:"Practice all learned rules in Quran recitation."
+}
+
+];
+
+
+function renderQaida(){
+
+  const box =
+    document.getElementById(
+      "qaidaLessons"
+    );
+
+
+  box.innerHTML =
+    qaidaLessons.map(
+      (l,i)=>`
+
+      <div class="lesson">
+
+        <h3>
+          ${i+1}.
+          ${escapeHTML(
+            l.title
+          )}
+        </h3>
+
+        <div class="arabic-large">
+          ${escapeHTML(
+            l.arabic
+          )}
+        </div>
+
+        <div class="trans hindi">
+
+          <div class="trans-title">
+            🇮🇳 हिन्दी
+          </div>
+
+          ${escapeHTML(
+            l.hindi
+          )}
+
+        </div>
+
+        <div class="trans english">
+
+          <div class="trans-title">
+            🇬🇧 English
+          </div>
+
+          ${escapeHTML(
+            l.english
+          )}
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="btn"
+            onclick="
+              speakText(
+                '${escapeJS(l.arabic)}',
+                'ar-SA'
+              )
+            "
+          >
+            🔊 Arabic
+          </button>
+
+          <button
+            class="btn secondary"
+            onclick="
+              speakText(
+                '${escapeJS(l.hindi)}',
+                'hi-IN'
+              )
+            "
+          >
+            🗣️ Hindi
+          </button>
+
+          <button
+            class="btn secondary"
+            onclick="
+              speakText(
+                '${escapeJS(l.english)}',
+                'en-US'
+              )
+            "
+          >
+            🗣️ English
+          </button>
+
+          <button
+            class="my-voice-small"
+            onclick="playMyVoice()"
+          >
+            🎙️ मेरी आवाज
+          </button>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   NAMAZ
+========================================================= */
+
+const namazSteps = [
+
+[
+"1. Niyyah",
+"जिस नमाज़ को पढ़ना है उसकी नीयत दिल में करें।"
+],
+
+[
+"2. Takbeer",
+"Allahu Akbar कहकर नमाज़ शुरू करें।"
+],
+
+[
+"3. Qiyam",
+"क़ियाम में खड़े होकर क़िराअत पढ़ी जाती है।"
+],
+
+[
+"4. Ruku",
+"रुकू में झुककर Allah की तस्बीह करें।"
+],
+
+[
+"5. Qaumah",
+"रुकू से उठकर सीधे खड़े हों।"
+],
+
+[
+"6. Sajdah",
+"सजदे में Allah की तस्बीह करें।"
+],
+
+[
+"7. Jalsa",
+"दो सजदों के बीच बैठें।"
+],
+
+[
+"8. Second Sajdah",
+"दूसरा सजदा करें।"
+],
+
+[
+"9. Tashahhud",
+"बैठकर अत्तहियात पढ़ें।"
+],
+
+[
+"10. Salam",
+"दाईं और बाईं तरफ सलाम फेरकर नमाज़ पूरी करें।"
+]
+
+];
+
+
+function renderNamaz(){
+
+  const box =
+    document.getElementById(
+      "namazContent"
+    );
+
+
+  box.innerHTML =
+    `
+
+    <div class="notice">
+
+      नमाज़ की exact fiqh details अलग-अलग madhhab में
+      कुछ जगह अलग हो सकती हैं। अपने विश्वसनीय स्थानीय
+      आलिम से practical correction भी लें।
+
+    </div>
+
+    ${namazSteps.map(
+      x=>`
+
+      <div class="lesson">
+
+        <h3>
+          ${escapeHTML(
+            x[0]
+          )}
+        </h3>
+
+        <p>
+          ${escapeHTML(
+            x[1]
+          )}
+        </p>
+
+        <div class="controls">
+
+          <button
+            class="btn secondary"
+            onclick="
+              speakText(
+                '${escapeJS(x[1])}',
+                'hi-IN'
+              )
+            "
+          >
+            🔊 सुनें
+          </button>
+
+          <button
+            class="my-voice-small"
+            onclick="playMyVoice()"
+          >
+            🎙️ मेरी आवाज
+          </button>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("")}
+
+    <div class="lesson">
+
+      <h3>
+        📖 नमाज़ में पढ़ी जाने वाली मुख्य चीज़ें
+      </h3>
+
+      <p>
+        Surah Al-Fatihah, अन्य Surah/ayah,
+        Tasbeeh-e-Ruku, Tasbeeh-e-Sajdah,
+        Tashahhud, Durood और Dua आदि।
+      </p>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ROZA
+========================================================= */
+
+function renderRoza(){
+
+  const box =
+    document.getElementById(
+      "rozaContent"
+    );
+
+
+  const items=[
+
+    [
+      "🌙 Roza क्या है?",
+      "सुबह सादिक से सूर्यास्त तक Allah की इबादत की नीयत से खाने-पीने और अन्य रोज़ा तोड़ने वाली चीज़ों से बचना।"
+    ],
+
+    [
+      "🕐 Sehri",
+      "सहरी का समय समाप्त होने से पहले खाना-पीना बंद करें। स्थानीय timetable के अनुसार Fajr का समय देखें।"
+    ],
+
+    [
+      "🌅 Iftar",
+      "सूरज डूबने के बाद रोज़ा खोलें और Allah का शुक्र करें।"
+    ],
+
+    [
+      "💧 रोज़े में जानबूझकर खाना-पीना",
+      "जानबूझकर रोज़ा तोड़ने के मामलों के अलग-अलग fiqh rules हो सकते हैं। व्यक्तिगत मामले में आलिम से पूछें।"
+    ],
+
+    [
+      "🤲 Dua और Ibadah",
+      "Quran पढ़ना, ज़िक्र, दुआ, सदक़ा और अच्छे कामों में बढ़ोतरी करें।"
+    ]
+
+  ];
+
+
+  box.innerHTML =
+    items.map(
+      x=>`
+
+      <div class="lesson">
+
+        <h3>
+          ${escapeHTML(
+            x[0]
+          )}
+        </h3>
+
+        <p>
+          ${escapeHTML(
+            x[1]
+          )}
+        </p>
+
+        <div class="controls">
+
+          <button
+            class="btn secondary"
+            onclick="
+              speakText(
+                '${escapeJS(x[1])}',
+                'hi-IN'
+              )
+            "
+          >
+            🔊 सुनें
+          </button>
+
+          <button
+            class="my-voice-small"
+            onclick="playMyVoice()"
+          >
+            🎙️ मेरी आवाज
+          </button>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   HADITH
+========================================================= */
+
+function renderHadith(){
+
+  const box =
+    document.getElementById(
+      "hadithContent"
+    );
+
+
+  const hadith=[
+
+    {
+      title:"नीयत",
+      text:"हर काम का मूल्य उसकी नीयत पर निर्भर है।"
+    },
+
+    {
+      title:"अच्छा व्यवहार",
+      text:"अच्छे अख़लाक़ और लोगों के साथ अच्छा व्यवहार इस्लामी शिक्षा का महत्वपूर्ण हिस्सा है।"
+    },
+
+    {
+      title:"सच्चाई",
+      text:"सच बोलना और अमानत की हिफाज़त करना महत्वपूर्ण इस्लामी गुण हैं।"
+    },
+
+    {
+      title:"माता-पिता",
+      text:"माता-पिता के साथ अच्छा व्यवहार करने की शिक्षा दी गई है।"
+    },
+
+    {
+      title:"पड़ोसी",
+      text:"पड़ोसी के अधिकार और उसके साथ अच्छा व्यवहार महत्वपूर्ण हैं।"
+    }
+
+  ];
+
+
+  box.innerHTML =
+    hadith.map(
+      h=>`
+
+      <div class="lesson">
+
+        <h3>
+          📜
+          ${escapeHTML(
+            h.title
+          )}
+        </h3>
+
+        <p>
+          ${escapeHTML(
+            h.text
+          )}
+        </p>
+
+        <div class="controls">
+
+          <button
+            class="btn secondary"
+            onclick="
+              speakText(
+                '${escapeJS(h.text)}',
+                'hi-IN'
+              )
+            "
+          >
+            🔊 सुनें
+          </button>
+
+          <button
+            class="my-voice-small"
+            onclick="playMyVoice()"
+          >
+            🎙️ मेरी आवाज
+          </button>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   BROWSER VOICE
+========================================================= */
+
+let voices=[];
+
+
+function loadVoices(){
+
+  if(
+    !("speechSynthesis" in window)
+  ){
+
+    return;
+
+  }
+
+
+  voices =
+    speechSynthesis.getVoices();
+
+}
+
+
+if(
+  "speechSynthesis" in window
+){
+
+  loadVoices();
+
+  speechSynthesis.onvoiceschanged =
+    loadVoices;
+
+}
+
+
+function speakText(
+  text,
+  lang
+){
+
+  if(
+    !("speechSynthesis" in window)
+  ){
+
+    alert(
+      "इस browser में Text-to-Speech उपलब्ध नहीं है।"
+    );
+
+    return;
+
+  }
+
+
+  speechSynthesis.cancel();
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      text
+    );
+
+
+  utterance.lang =
+    lang;
+
+
+  utterance.rate =
+    .82;
+
+
+  utterance.pitch =
+    1;
+
+
+  const wanted =
+    voices.find(
+      v =>
+        v.lang
+          .toLowerCase()
+          .startsWith(
+            lang
+              .substring(
+                0,
+                2
+              )
+              .toLowerCase()
+          )
+    );
+
+
+  if(wanted){
+
+    utterance.voice =
+      wanted;
+
+  }
+
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* =========================================================
+   AL USTAD
+========================================================= */
+
+function askUstad(){
+
+  const input =
+    document.getElementById(
+      "question"
+    );
+
+
+  const question =
+    input.value.trim();
+
+
+  if(!question) return;
+
+
+  addChat(
+    question,
+    "user"
+  );
+
+
+  input.value =
+    "";
+
+
+  const answer =
+    ustadAnswer(
+      question
+    );
+
+
+  setTimeout(
+    ()=>{
+      addChat(
+        answer,
+        "bot"
+      );
+    },
+    300
+  );
+
+}
+
+
+function addChat(
+  text,
+  type
+){
+
+  const chat =
+    document.getElementById(
+      "chat"
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "msg " +
+    type;
+
+
+  div.innerHTML =
+    escapeHTML(
+      text
+    ).replace(
+      /\n/g,
+      "<br>"
+    );
+
+
+  chat.appendChild(
+    div
+  );
+
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+}
+
+
+function ustadAnswer(q){
+
+  const x =
+    q.toLowerCase();
+
+
+  if(
+    x.includes("qaida") ||
+    x.includes("कायदा")
+  ){
+
+    return "Noorani Qaida में पहले Arabic letters, फिर Harakat, Tanween, Madd, Sukoon, Shaddah और फिर Tajweed के rules सीखे जाते हैं। Qaida section में lessons दिए गए हैं।";
+
+  }
+
+
+  if(
+    x.includes("namaz") ||
+    x.includes("नमाज़") ||
+    x.includes("نماز")
+  ){
+
+    return "Namaz सीखने के लिए Niyyah, Takbeer, Qiyam, Ruku, Qaumah, Sajdah, Jalsa, Tashahhud और Salam के क्रम को समझें। अलग-अलग fiqh में कुछ details अलग हो सकती हैं।";
+
+  }
+
+
+  if(
+    x.includes("roza") ||
+    x.includes("रोजा") ||
+    x.includes("रोज़ा")
+  ){
+
+    return "Roza में Sehri से Maghrib तक रोज़े की हालत में रहना, इबादत बढ़ाना और रोज़ा तोड़ने वाली चीज़ों से बचना शामिल है। व्यक्तिगत fiqh सवाल के लिए विश्वसनीय आलिम से पूछें।";
+
+  }
+
+
+  if(
+    x.includes("quran") ||
+    x.includes("कुरान") ||
+    x.includes("क़ुरआन")
+  ){
+
+    return "Quran section में 114 Surah उपलब्ध हैं। किसी Surah पर tap करें और Arabic, English, Hindi तथा audio options इस्तेमाल करें।";
+
+  }
+
+
+  if(
+    x.includes("amma") ||
+    x.includes("अम्मा") ||
+    x.includes("पारा")
+  ){
+
+    return "Juz Amma section में Surah An-Naba (78) से Surah An-Naas (114) तक का 30वाँ पारा उपलब्ध है।";
+
+  }
+
+
+  if(
+    x.includes("tajweed") ||
+    x.includes("तजवीद")
+  ){
+
+    return "Tajweed में सही makhraj और pronunciation बहुत महत्वपूर्ण हैं। Qalqalah, Noon Saakin, Tanween, Idgham, Ikhfa, Iqlab और Meem Saakin जैसे rules Qaida में दिए गए हैं।";
+
+  }
+
+
+  if(
+    x.includes("voice") ||
+    x.includes("आवाज़") ||
+    x.includes("आवाज")
+  ){
+
+    return "वेबसाइट में आपकी 123.mp3 recording जोड़ी गई है। 🎙️ मेरी आवाज वाले button को दबाकर recording सुनी जा सकती है।";
+
+  }
+
+
+  return "मैं Quran, Noorani Qaida, Tajweed, Namaz, Roza और basic Islamic learning में मदद कर सकता हूँ। अपना सवाल थोड़ा स्पष्ट लिखें।";
+
+}
+
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function escapeHTML(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+function escapeJS(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  )
+  .replace(
+    /\n/g,
+    " "
+  );
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    renderQaida();
+
+    renderNamaz();
+
+    renderRoza();
+
+    renderHadith();
+
+    loadQuran();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
