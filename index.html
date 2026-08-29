@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noorani Qaida - AI Ustad</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+
+header{
+  background:linear-gradient(135deg,#075e54,#0b806f);
+  color:white;
+  padding:18px 15px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.logo small{
+  display:block;
+  font-size:11px;
+  opacity:.85;
+  margin-top:3px;
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.user-photo{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:none;
+  border:2px solid white;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+.login-btn{
+  background:white;
+  color:#075e54;
+  padding:10px 15px;
+  border-radius:22px;
+  font-weight:bold;
+}
+
+.logout-btn{
+  background:#d32f2f;
+  color:white;
+  padding:9px 12px;
+  border-radius:20px;
+  display:none;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 14px 100px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#ffffff,#e9fff9);
+  border-radius:22px;
+  padding:25px 18px;
+  margin-bottom:18px;
+  box-shadow:0 4px 18px rgba(0,0,0,.07);
+}
+
+.hero h1{
+  color:#075e54;
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#596579;
+  line-height:1.6;
+}
+
+.status{
+  margin-top:14px;
+  padding:10px 13px;
+  border-radius:10px;
+  background:#fff8e1;
+  color:#765b00;
+  font-size:14px;
+}
+
+.section-title{
+  font-size:22px;
+  margin:22px 0 12px;
+  color:#172033;
+}
+
+.lessons{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;
+}
+
+.lesson-card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+  border:1px solid #edf0f5;
+}
+
+.lesson-number{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#e3f6f2;
+  color:#075e54;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.lesson-card h3{
+  margin-bottom:7px;
+  font-size:19px;
+}
+
+.lesson-card p{
+  color:#687386;
+  line-height:1.5;
+  margin-bottom:13px;
+}
+
+.card-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.open-btn{
+  background:#075e54;
+  color:white;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.sound-btn{
+  background:#e8f5e9;
+  color:#176b31;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.ai-box{
+  margin-top:25px;
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 4px 18px rgba(0,0,0,.07);
+}
+
+.ai-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.ai-icon{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#673ab7;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+.chat{
+  height:270px;
+  overflow-y:auto;
+  background:#f7f8fc;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:12px;
+}
+
+.message{
+  max-width:88%;
+  padding:10px 13px;
+  margin-bottom:9px;
+  border-radius:14px;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.bot{
+  background:white;
+  border:1px solid #e5e8ef;
+}
+
+.user{
+  background:#075e54;
+  color:white;
+  margin-left:auto;
+}
+
+.ai-input{
+  display:flex;
+  gap:8px;
+}
+
+.ai-input input{
+  flex:1;
+  border:1px solid #d8dde7;
+  border-radius:12px;
+  padding:13px;
+  outline:none;
+}
+
+.ai-input button{
+  padding:0 15px;
+  border-radius:12px;
+  background:#673ab7;
+  color:white;
+  font-weight:bold;
+}
+
+.mic-btn{
+  width:50px;
+  background:#ff9800 !important;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:500;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content{
+  width:100%;
+  max-width:600px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#eee;
+  font-size:20px;
+}
+
+.lesson-detail{
+  padding-top:25px;
+}
+
+.arabic{
+  font-size:55px;
+  text-align:center;
+  direction:rtl;
+  color:#075e54;
+  margin:25px 0;
+  font-family:serif;
+}
+
+.detail-text{
+  line-height:1.8;
+  color:#4d586b;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#687386;
+}
+
+.empty{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  text-align:center;
+  color:#687386;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#777;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  .logo{
+    font-size:18px;
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
+  .login-btn{
+    padding:8px 11px;
+    font-size:12px;
+  }
+
+  .user-photo{
+    width:32px;
+    height:32px;
+  }
+
+  .arabic{
+    font-size:48px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      📖 Noorani Qaida
+      <small>Learn Quran with AI Ustad</small>
+    </div>
+
+    <div class="user-area">
+      <img id="userPhoto" class="user-photo">
+      <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+        🔐 Google Login
+      </button>
+      <button id="logoutBtn" class="logout-btn" onclick="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>🌙 Noorani Qaida</h1>
+    <p>
+      Quran padhna aasaan tareeke se seekhiye.
+      Har lesson ko padhiye, suniye aur AI Ustad se sawaal poochhiye.
+    </p>
+
+    <div id="status" class="status">
+      Firebase connect ho raha hai...
+    </div>
+  </section>
+
+  <h2 class="section-title">📚 Qaida Lessons</h2>
+
+  <div id="lessons" class="lessons">
+    <div class="loading">Lessons load ho rahe hain...</div>
+  </div>
+
+  <section class="ai-box">
+
+    <div class="ai-title">
+      <div class="ai-icon">🤖</div>
+      <div>
+        <h2>AI Ustad</h2>
+        <p style="color:#777;font-size:13px;">
+          Qaida ke baare mein sawaal poochhiye
+        </p>
+      </div>
+    </div>
+
+    <div id="chat" class="chat">
+      <div class="message bot">
+        Assalamualaikum! 👋<br>
+        Main AI Ustad hoon. Aap Noorani Qaida ke baare mein
+        sawaal poochh sakte hain.
+      </div>
+    </div>
+
+    <div class="ai-input">
+      <input
+        id="question"
+        type="text"
+        placeholder="Apna sawaal likhiye..."
+        onkeydown="if(event.key==='Enter') askUstad()"
+      >
+
+      <button class="mic-btn" onclick="startVoice()">
+        🎤
+      </button>
+
+      <button onclick="askUstad()">
+        Send
+      </button>
+    </div>
+
+  </section>
+
+</div>
+
+<footer>
+  © 2026 Noorani Qaida • Learn Quran Easily
+</footer>
+
+
+<!-- LESSON MODAL -->
+
+<div id="lessonModal" class="modal">
+
+  <div class="modal-content">
+
+    <button class="close" onclick="closeLesson()">×</button>
+
+    <div class="lesson-detail">
+
+      <h2 id="modalTitle">Lesson</h2>
+
+      <div id="modalArabic" class="arabic">
+        ا
+      </div>
+
+      <div class="card-buttons" style="justify-content:center;">
+        <button class="sound-btn" onclick="speakArabic()">
+          🔊 Suno
+        </button>
+      </div>
+
+      <p id="modalDescription" class="detail-text" style="margin-top:20px;">
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAmzfPL1wr8oVl4vwTm5un1H6yfk6bv1Y4",
+  authDomain: "noorani-qaida-aff8c.firebaseapp.com",
+  projectId: "noorani-qaida-aff8c",
+  storageBucket: "noorani-qaida-aff8c.firebasestorage.app",
+  messagingSenderId: "1088322646379",
+  appId: "1:1088322646379:web:c6a705ecf3c68a7e1ddc2e",
+  measurementId: "G-09XXW4K8QC"
+};
+
+
+/* =========================================================
+   FIREBASE START
+========================================================= */
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const provider = new firebase.auth.GoogleAuthProvider();
+
+let currentUser = null;
+let currentLesson = null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const statusBox = document.getElementById("status");
+const lessonsBox = document.getElementById("lessons");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const userPhoto = document.getElementById("userPhoto");
+
+
+/* =========================================================
+   GOOGLE LOGIN
+========================================================= */
+
+function loginGoogle(){
+
+  statusBox.textContent = "Google Login open ho raha hai...";
+
+  auth.signInWithPopup(provider)
+    .then(result => {
+
+      currentUser = result.user;
+
+      statusBox.textContent =
+        "Welcome " + (currentUser.displayName || "User") + " 👋";
+
+    })
+    .catch(error => {
+
+      console.error(error);
+
+      statusBox.textContent =
+        "Login error: " + error.message;
+
+    });
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+  auth.signOut()
+    .then(() => {
+
+      statusBox.textContent =
+        "Aap logout ho gaye hain.";
+
+    })
+    .catch(error => {
+
+      console.error(error);
+
+    });
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+auth.onAuthStateChanged(user => {
+
+  currentUser = user;
+
+  if(user){
+
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+
+    if(user.photoURL){
+
+      userPhoto.src = user.photoURL;
+      userPhoto.style.display = "block";
+
+    }
+
+    statusBox.innerHTML =
+      "✅ Login successful — " +
+      (user.displayName || "User");
+
+  }else{
+
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+    userPhoto.style.display = "none";
+
+    statusBox.innerHTML =
+      "📖 Guest mode active. Google Login karke progress save kar sakte hain.";
+
+  }
+
+});
+
+
+/* =========================================================
+   LOAD LESSONS FROM FIRESTORE
+========================================================= */
+
+function loadLessons(){
+
+  lessonsBox.innerHTML =
+    '<div class="loading">Lessons load ho rahe hain...</div>';
+
+  db.collection("lessons")
+    .orderBy("title")
+    .get()
+
+    .then(snapshot => {
+
+      lessonsBox.innerHTML = "";
+
+      if(snapshot.empty){
+
+        showDefaultLessons();
+
+        return;
+
+      }
+
+      let count = 1;
+
+      snapshot.forEach(doc => {
+
+        const data = doc.data();
+
+        createLessonCard(
+          data,
+          count,
+          doc.id
+        );
+
+        count++;
+
+      });
+
+    })
+
+    .catch(error => {
+
+      console.error("Firestore error:",error);
+
+      /*
+       If orderBy/index causes an error,
+       try simple collection read.
+      */
+
+      db.collection("lessons")
+        .get()
+        .then(snapshot => {
+
+          lessonsBox.innerHTML = "";
+
+          if(snapshot.empty){
+
+            showDefaultLessons();
+
+            return;
+
+          }
+
+          let count = 1;
+
+          snapshot.forEach(doc => {
+
+            createLessonCard(
+              doc.data(),
+              count,
+              doc.id
+            );
+
+            count++;
+
+          });
+
+        })
+
+        .catch(err => {
+
+          console.error(err);
+
+          showDefaultLessons();
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   CREATE LESSON CARD
+========================================================= */
+
+function createLessonCard(data, number, id){
+
+  const title =
+    data.title ||
+    data.name ||
+    ("Lesson " + number);
+
+  const description =
+    data.description ||
+    data.desc ||
+    "Is lesson ko padhiye aur pronunciation suniye.";
+
+  const arabic =
+    data.arabic ||
+    data.text ||
+    "ا";
+
+  const card =
+    document.createElement("div");
+
+  card.className = "lesson-card";
+
+  card.innerHTML = `
+
+    <div class="lesson-number">
+      ${number}
+    </div>
+
+    <h3>${escapeHtml(title)}</h3>
+
+    <p>${escapeHtml(description)}</p>
+
+    <div class="card-buttons">
+
+      <button
+        class="open-btn"
+        onclick='openLesson(${JSON.stringify({
+          title:title,
+          description:description,
+          arabic:arabic
+        })})'
+      >
+        📖 Open
+      </button>
+
+      <button
+        class="sound-btn"
+        onclick='speakText(${JSON.stringify(arabic)})'
+      >
+        🔊 Sound
+      </button>
+
+    </div>
+
+  `;
+
+  lessonsBox.appendChild(card);
+
+}
+
+
+/* =========================================================
+   DEFAULT LESSONS
+========================================================= */
+
+function showDefaultLessons(){
+
+  const defaultLessons = [
+
+    {
+      title:"Alif",
+      arabic:"ا",
+      description:"Alif ko pehchaniye aur uski awaaz ko samajhiye."
+    },
+
+    {
+      title:"Baa",
+      arabic:"ب",
+      description:"Baa ka makhraj aur pronunciation seekhiye."
+    },
+
+    {
+      title:"Taa",
+      arabic:"ت",
+      description:"Taa ko sahi tareeke se padhna seekhiye."
+    },
+
+    {
+      title:"Thaa",
+      arabic:"ث",
+      description:"Thaa ki awaaz aur pronunciation practice kijiye."
+    },
+
+    {
+      title:"Jeem",
+      arabic:"ج",
+      description:"Jeem ka sahi pronunciation seekhiye."
+    },
+
+    {
+      title:"Haa",
+      arabic:"ح",
+      description:"Haa ke makhraj ko practice kijiye."
+    }
+
+  ];
+
+  lessonsBox.innerHTML = "";
+
+  defaultLessons.forEach((lesson,index)=>{
+
+    createLessonCard(
+      lesson,
+      index + 1,
+      "default-" + (index + 1)
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
+
+function openLesson(data){
+
+  currentLesson = data;
+
+  document.getElementById("modalTitle").textContent =
+    data.title || "Lesson";
+
+  document.getElementById("modalArabic").textContent =
+    data.arabic || "ا";
+
+  document.getElementById("modalDescription").textContent =
+    data.description ||
+    "Is lesson ko practice kijiye.";
+
+  document.getElementById("lessonModal").style.display =
+    "flex";
+
+}
+
+
+/* =========================================================
+   CLOSE LESSON
+========================================================= */
+
+function closeLesson(){
+
+  document.getElementById("lessonModal").style.display =
+    "none";
+
+}
+
+
+/* =========================================================
+   SPEECH / SOUND
+========================================================= */
+
+function speakText(text){
+
+  if(!("speechSynthesis" in window)){
+
+    alert("Aapke browser mein voice support available nahi hai.");
+
+    return;
+
+  }
+
+  window.speechSynthesis.cancel();
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+  speech.lang = "ar-SA";
+  speech.rate = 0.65;
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(speech);
+
+}
+
+
+function speakArabic(){
+
+  if(currentLesson){
+
+    speakText(
+      currentLesson.arabic ||
+      currentLesson.title
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   AI USTAD
+========================================================= */
+
+function askUstad(){
+
+  const input =
+    document.getElementById("question");
+
+  const question =
+    input.value.trim();
+
+  if(!question){
+
+    return;
+
+  }
+
+  addMessage(
+    question,
+    "user"
+  );
+
+  input.value = "";
+
+  setTimeout(()=>{
+
+    const answer =
+      getUstadAnswer(question);
+
+    addMessage(
+      answer,
+      "bot"
+    );
+
+    speakText(answer);
+
+  },500);
+
+}
+
+
+/* =========================================================
+   AI USTAD BASIC KNOWLEDGE
+========================================================= */
+
+function getUstadAnswer(question){
+
+  const q =
+    question.toLowerCase();
+
+  if(
+    q.includes("alif") ||
+    q.includes("ا")
+  ){
+
+    return "Alif (ا) Arabic ka ek harf hai. Isko saaf aur seedhe tareeke se pehchanna aur padhna seekhiye.";
+
+  }
+
+  if(
+    q.includes("baa") ||
+    q.includes("ب")
+  ){
+
+    return "Baa (ب) ko honton se ada kiya jata hai. Baa ko dheere-dheere padhkar pronunciation ki practice kijiye.";
+
+  }
+
+  if(
+    q.includes("makhraj")
+  ){
+
+    return "Makhraj ka matlab hai harf ko uske sahi nikalne ki jagah se ada karna. Noorani Qaida mein makhraj ki practice bahut important hai.";
+
+  }
+
+  if(
+    q.includes("kaise padhe") ||
+    q.includes("kaise padh") ||
+    q.includes("seekh")
+  ){
+
+    return "Sabse pehle harf pehchaniye, phir ustad ki awaaz ke saath pronunciation repeat kijiye. Roz thodi practice karna behtar hai.";
+
+  }
+
+  if(
+    q.includes("tajweed")
+  ){
+
+    return "Tajweed Quran ko sahi pronunciation aur rules ke saath padhne ka ilm hai. Qaida se basic pronunciation strong kijiye.";
+
+  }
+
+  if(
+    q.includes("hello") ||
+    q.includes("salam") ||
+    q.includes("assalam")
+  ){
+
+    return "Wa Alaikum Assalam wa Rahmatullahi wa Barakatuh! 🤲 Main AI Ustad hoon. Aap Qaida ke baare mein sawaal pooch sakte hain.";
+
+  }
+
+  return "Main aapko Noorani Qaida seekhne mein madad kar sakta hoon. Aap harf, makhraj, pronunciation ya Tajweed ke baare mein sawaal poochhiye.";
+
+}
+
+
+/* =========================================================
+   CHAT MESSAGE
+========================================================= */
+
+function addMessage(text,type){
+
+  const chat =
+    document.getElementById("chat");
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "message " + type;
+
+  div.textContent =
+    text;
+
+  chat.appendChild(div);
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+}
+
+
+/* =========================================================
+   VOICE QUESTION
+========================================================= */
+
+function startVoice(){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(!SpeechRecognition){
+
+    alert(
+      "Voice input is browser mein available nahi hai. Chrome browser use karein."
+    );
+
+    return;
+
+  }
+
+  const recognition =
+    new SpeechRecognition();
+
+  recognition.lang = "hi-IN";
+
+  recognition.interimResults = false;
+
+  recognition.maxAlternatives = 1;
+
+  recognition.start();
+
+  statusBox.textContent =
+    "🎤 Sun raha hoon...";
+
+  recognition.onresult = function(event){
+
+    const text =
+      event.results[0][0].transcript;
+
+    document.getElementById("question").value =
+      text;
+
+    statusBox.textContent =
+      "Voice question mil gaya.";
+
+  };
+
+  recognition.onerror = function(){
+
+    statusBox.textContent =
+      "Voice input mein problem hui.";
+
+  };
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document.getElementById("lessonModal")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+
+      closeLesson();
+
+    }
+
+  });
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadLessons();
+
+console.log(
+  "Noorani Qaida Firebase App Started"
+);
+
+</script>
+
+</body>
+</html>
