@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<title>Noorani Qaida & Quran</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:#eef4f3;
+    color:#193c3a;
+}
+
+body{
+    min-height:100vh;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:0;
+}
+
+.header{
+    background:linear-gradient(135deg,#078c7e,#0aa693);
+    color:white;
+    padding:28px 24px 22px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 4px 18px rgba(0,0,0,.12);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:16px;
+}
+
+.subtitle{
+    font-size:19px;
+    line-height:1.8;
+    margin-bottom:18px;
+}
+
+.nav{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:2px;
+    scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{
+    display:none;
+}
+
+.nav button{
+    flex:0 0 auto;
+    background:rgba(255,255,255,.13);
+    color:white;
+    padding:14px 25px;
+    border-radius:40px;
+    font-size:18px;
+    white-space:nowrap;
+}
+
+.nav button.active{
+    background:white;
+    color:#087e72;
+}
+
+.container{
+    width:min(900px,100%);
+    margin:auto;
+    padding:28px 18px 100px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:28px;
+    margin-bottom:20px;
+    box-shadow:0 5px 22px rgba(0,0,0,.06);
+}
+
+.card h2{
+    margin:0 0 18px;
+    font-size:29px;
+    color:#174f4a;
+}
+
+.card p{
+    font-size:19px;
+    line-height:1.8;
+}
+
+.lesson-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.lesson{
+    background:#e8f6f4;
+    padding:20px;
+    border-radius:20px;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.lesson strong{
+    display:block;
+    color:#087d71;
+    margin-bottom:6px;
+}
+
+.ai-box{
+    background:white;
+    border-radius:28px;
+    padding:24px;
+    box-shadow:0 5px 25px rgba(0,0,0,.07);
+}
+
+.ai-title{
+    font-size:31px;
+    font-weight:700;
+    margin-bottom:12px;
+    color:#174f4a;
+}
+
+.ai-intro{
+    font-size:19px;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.status{
+    padding:14px 17px;
+    border-radius:16px;
+    margin-bottom:20px;
+    font-size:16px;
+    line-height:1.6;
+    background:#e7f6f3;
+    color:#17665e;
+}
+
+.status.error{
+    background:#fff0f0;
+    color:#a02e2e;
+}
+
+.status.ok{
+    background:#e7f7ec;
+    color:#176b36;
+}
+
+.chat{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:22px;
+    max-height:500px;
+    overflow-y:auto;
+}
+
+.message{
+    max-width:92%;
+    padding:17px 19px;
+    border-radius:22px;
+    font-size:18px;
+    line-height:1.8;
+    white-space:pre-wrap;
+}
+
+.message.user{
+    align-self:flex-end;
+    background:#078c7e;
+    color:white;
+    border-bottom-right-radius:7px;
+}
+
+.message.bot{
+    align-self:flex-start;
+    background:#e8f5f3;
+    color:#183f3c;
+    border-bottom-left-radius:7px;
+}
+
+.input-row{
+    display:flex;
+    gap:10px;
+}
+
+.input-row input{
+    flex:1;
+    min-width:0;
+    height:58px;
+    border:1px solid #d5dfdd;
+    border-radius:18px;
+    padding:0 17px;
+    font-size:18px;
+    outline:none;
+    background:#fff;
+}
+
+.input-row input:focus{
+    border-color:#078c7e;
+}
+
+.ask-btn{
+    background:#078c7e;
+    color:white;
+    border-radius:18px;
+    padding:0 23px;
+    font-size:18px;
+    min-width:85px;
+}
+
+.voice-btn{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#078c7e;
+    color:white;
+    font-size:28px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    z-index:100;
+}
+
+.example{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.example button{
+    background:#f0f5f4;
+    color:#176b64;
+    border:1px solid #dbe8e6;
+    padding:10px 14px;
+    border-radius:20px;
+    font-size:15px;
+}
+
+.footer{
+    text-align:center;
+    color:#71817f;
+    font-size:17px;
+    padding:20px 10px;
+}
+
+.info-list{
+    padding-left:22px;
+}
+
+.info-list li{
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:10px;
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:22px 16px 18px;
+    }
+
+    .logo{
+        font-size:25px;
+    }
+
+    .subtitle{
+        font-size:17px;
+    }
+
+    .nav button{
+        font-size:16px;
+        padding:12px 20px;
+    }
+
+    .container{
+        padding:20px 12px 110px;
+    }
+
+    .card,
+    .ai-box{
+        padding:21px;
+        border-radius:22px;
+    }
+
+    .card h2,
+    .ai-title{
+        font-size:27px;
+    }
+
+    .lesson-grid{
+        grid-template-columns:1fr;
+    }
+
+    .message{
+        font-size:17px;
+    }
+
+    .input-row{
+        align-items:stretch;
+    }
+
+    .input-row input{
+        font-size:16px;
+    }
+
+    .ask-btn{
+        padding:0 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        📖 Noorani Qaida & Quran
+    </div>
+
+    <div class="subtitle">
+        Qaida • Quran • Juz Amma • Namaz • Roza • Hadith • Al Ustad
+    </div>
+
+    <div class="nav">
+
+        <button class="active" onclick="showPage('home',this)">
+            🏠 Home
+        </button>
+
+        <button onclick="showPage('qaida',this)">
+            📚 Qaida
+        </button>
+
+        <button onclick="showPage('quran',this)">
+            📖 Quran
+        </button>
+
+        <button onclick="showPage('juz',this)">
+            📜 Juz Amma
+        </button>
+
+        <button onclick="showPage('namaz',this)">
+            🕌 Namaz
+        </button>
+
+        <button onclick="showPage('roza',this)">
+            🌙 Roza
+        </button>
+
+        <button onclick="showPage('hadith',this)">
+            📜 Hadith
+        </button>
+
+        <button onclick="showPage('ustad',this)">
+            🤖 Al Ustad
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+    <div class="card">
+
+        <h2>🏠 Noorani Qaida & Quran</h2>
+
+        <p>
+            Assalamu Alaikum wa Rahmatullahi wa Barakatuh 🌙
+        </p>
+
+        <p>
+            यह वेबसाइट Quran, Noorani Qaida, Tajweed,
+            Namaz, Roza और basic Islamic learning के लिए बनाई गई है।
+        </p>
+
+        <div class="lesson-grid">
+
+            <div class="lesson">
+                <strong>📚 Noorani Qaida</strong>
+                Arabic letters और सही पढ़ने की शुरुआत।
+            </div>
+
+            <div class="lesson">
+                <strong>📖 Quran</strong>
+                Quran पढ़ने और समझने की basic जानकारी।
+            </div>
+
+            <div class="lesson">
+                <strong>🕌 Namaz</strong>
+                नमाज़ से जुड़ी basic जानकारी।
+            </div>
+
+            <div class="lesson">
+                <strong>🌙 Roza</strong>
+                रोज़े से जुड़ी basic जानकारी।
+            </div>
+
+            <div class="lesson">
+                <strong>📜 Hadith</strong>
+                Hadith की basic learning।
+            </div>
+
+            <div class="lesson">
+                <strong>🤖 Al Ustad</strong>
+                अपना सवाल लिखकर जवाब पूछें।
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QAIDA -->
+<section id="qaida" class="page">
+
+    <div class="card">
+
+        <h2>📚 Noorani Qaida</h2>
+
+        <p>
+            Noorani Qaida Arabic पढ़ने की शुरुआती किताब है।
+            इसमें Arabic letters, हरकत, जोड़ और pronunciation
+            सीखने की basic practice होती है।
+        </p>
+
+        <div class="lesson-grid">
+
+            <div class="lesson">
+                <strong>ا ب ت ث</strong>
+                Arabic Letters
+            </div>
+
+            <div class="lesson">
+                <strong>َ ِ ُ</strong>
+                Zabar, Zer, Pesh
+            </div>
+
+            <div class="lesson">
+                <strong>ً ٍ ٌ</strong>
+                Tanween
+            </div>
+
+            <div class="lesson">
+                <strong>ْ</strong>
+                Jazm / Sukoon
+            </div>
+
+            <div class="lesson">
+                <strong>ّ</strong>
+                Tashdeed
+            </div>
+
+            <div class="lesson">
+                <strong>ٓ</strong>
+                Madd
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QURAN -->
+<section id="quran" class="page">
+
+    <div class="card">
+
+        <h2>📖 Quran</h2>
+
+        <p>
+            Quran पढ़ते समय सही pronunciation और Tajweed
+            का ध्यान रखना चाहिए।
+        </p>
+
+        <ul class="info-list">
+
+            <li>Arabic letters की सही आवाज़ सीखें।</li>
+
+            <li>हरकत को सही तरीके से पढ़ें।</li>
+
+            <li>Tajweed के basic rules सीखें।</li>
+
+            <li>किसी योग्य शिक्षक से pronunciation check करवाएँ।</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- JUZ -->
+<section id="juz" class="page">
+
+    <div class="card">
+
+        <h2>📜 Juz Amma</h2>
+
+        <p>
+            Juz Amma Quran का 30वाँ juz है और इसमें कई छोटी
+            और मशहूर surahs शामिल हैं।
+        </p>
+
+        <div class="lesson-grid">
+
+            <div class="lesson">
+                <strong>سورة الناس</strong>
+                Surah An-Naas
+            </div>
+
+            <div class="lesson">
+                <strong>سورة الفلق</strong>
+                Surah Al-Falaq
+            </div>
+
+            <div class="lesson">
+                <strong>سورة الإخلاص</strong>
+                Surah Al-Ikhlas
+            </div>
+
+            <div class="lesson">
+                <strong>سورة الكافرون</strong>
+                Surah Al-Kafirun
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAMAZ -->
+<section id="namaz" class="page">
+
+    <div class="card">
+
+        <h2>🕌 Namaz</h2>
+
+        <p>
+            नमाज़ Islam की महत्वपूर्ण इबादत है।
+            नमाज़ के सही तरीके और अरकान किसी योग्य शिक्षक से सीखना बेहतर है।
+        </p>
+
+        <ul class="info-list">
+
+            <li>Wudu की जानकारी</li>
+            <li>Namaz की niyyat</li>
+            <li>Takbeer</li>
+            <li>Qiyam</li>
+            <li>Ruku</li>
+            <li>Sajdah</li>
+            <li>Qa'dah और Salaam</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ROZA -->
+<section id="roza" class="page">
+
+    <div class="card">
+
+        <h2>🌙 Roza</h2>
+
+        <p>
+            Roza से संबंधित व्यक्तिगत और विस्तृत मसाइल में
+            अपने भरोसेमंद qualified Islamic scholar से पूछना चाहिए।
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- HADITH -->
+<section id="hadith" class="page">
+
+    <div class="card">
+
+        <h2>📜 Hadith</h2>
+
+        <p>
+            Hadith को समझते समय authentic source और योग्य
+            scholar की explanation को प्राथमिकता दें।
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- AI USTAD -->
+<section id="ustad" class="page">
+
+    <div class="ai-box">
+
+        <div class="ai-title">
+            🤖 Al Ustad
+        </div>
+
+        <div class="ai-intro">
+            Quran, Qaida, Namaz, Roza और basic Islamic
+            learning के बारे में सवाल पूछें।
+        </div>
+
+        <div id="firebaseStatus" class="status">
+            🔄 Firebase database connect हो रहा है...
+        </div>
+
+        <div id="chat" class="chat">
+
+            <div class="message bot">
+                السلام عليكم ورحمة الله وبركاته 🌙
+
+                मैं Al Ustad हूँ।
+
+                Quran, Qaida, Namaz या Roza के बारे में सवाल पूछिए।
+            </div>
+
+        </div>
+
+        <div class="input-row">
+
+            <input
+                id="questionInput"
+                type="text"
+                placeholder="अपना सवाल लिखिए..."
+                autocomplete="off"
+            >
+
+            <button
+                class="ask-btn"
+                onclick="askUstad()"
+            >
+                पूछें
+            </button>
+
+        </div>
+
+        <div class="example">
+
+            <button onclick="setQuestion('jadu karna haram hai ya nahi')">
+                जादू करना हराम है?
+            </button>
+
+            <button onclick="setQuestion('Namaz kya hai')">
+                नमाज़ क्या है?
+            </button>
+
+            <button onclick="setQuestion('Roza kya hai')">
+                रोज़ा क्या है?
+            </button>
+
+            <button onclick="setQuestion('Tajweed kya hai')">
+                Tajweed क्या है?
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="footer">
+    © 2026 Noorani Qaida & Quran Learning
+</div>
+
+</main>
+
+
+<button
+    class="voice-btn"
+    onclick="startVoice()"
+    title="Voice Question"
+>
+    🎙️
+</button>
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyAmzfPL1wr8oVl4vwTm5un1H6yfk6bv1Y4",
+
+    authDomain: "noorani-qaida-aff8c.firebaseapp.com",
+
+    projectId: "noorani-qaida-aff8c",
+
+    storageBucket: "noorani-qaida-aff8c.firebasestorage.app",
+
+    messagingSenderId: "1088322646379",
+
+    appId: "1:1088322646379:web:c6a705ecf3c68a7e1ddc2e",
+
+    measurementId: "G-09XXW4K8QC"
+
+};
+
+
+/* =====================================================
+   FIREBASE START
+===================================================== */
+
+let db = null;
+let firebaseReady = false;
+
+try {
+
+    firebase.initializeApp(firebaseConfig);
+
+    db = firebase.firestore();
+
+    firebaseReady = true;
+
+    setFirebaseStatus(
+        "Firebase connected है। Al Ustad database से जवाब खोज सकता है।",
+        "ok"
+    );
+
+    loadFirebaseLessons();
+
+} catch(error) {
+
+    console.error("Firebase Error:", error);
+
+    setFirebaseStatus(
+        "Firebase connection में समस्या है। Basic Al Ustad फिर भी काम करेगा।",
+        "error"
+    );
+
+}
+
+
+/* =====================================================
+   FIREBASE STATUS
+===================================================== */
+
+function setFirebaseStatus(text,type=""){
+
+    const box = document.getElementById("firebaseStatus");
+
+    if(!box) return;
+
+    box.textContent = "ℹ️ " + text;
+
+    box.className = "status " + type;
+}
+
+
+/* =====================================================
+   LOAD LESSONS
+===================================================== */
+
+let lessons = [];
+
+
+async function loadFirebaseLessons(){
+
+    if(!db) return;
+
+    try{
+
+        const snapshot =
+            await db.collection("lessons").get();
+
+        lessons = [];
+
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+
+            lessons.push({
+
+                id: doc.id,
+
+                question:
+                    data.question
+                    ? String(data.question)
+                    : "",
+
+                answer:
+                    data.answer
+                    ? String(data.answer)
+                    : "",
+
+                title:
+                    data.title
+                    ? String(data.title)
+                    : ""
+
+            });
+
+        });
+
+        console.log(
+            "Firebase lessons loaded:",
+            lessons
+        );
+
+        if(lessons.length > 0){
+
+            setFirebaseStatus(
+                "Firebase से " +
+                lessons.length +
+                " lesson/question load हो गए हैं।",
+                "ok"
+            );
+
+        }else{
+
+            setFirebaseStatus(
+                "Firebase connected है, लेकिन lessons collection खाली है।",
+                ""
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Firestore read error:",
+            error
+        );
+
+        /*
+         IMPORTANT:
+         Database read fail होने पर भी
+         Al Ustad बंद नहीं होगा।
+        */
+
+        setFirebaseStatus(
+            "Firebase connected है, लेकिन lessons read नहीं हो सके। Basic Al Ustad चालू है।",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(id,button){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+    const page =
+        document.getElementById(id);
+
+    if(page){
+
+        page.classList.add("active");
+
+    }
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   SET QUESTION
+===================================================== */
+
+function setQuestion(text){
+
+    const input =
+        document.getElementById("questionInput");
+
+    input.value = text;
+
+    showPage(
+        "ustad",
+        document.querySelectorAll(".nav button")[7]
+    );
+
+    setTimeout(() => {
+
+        askUstad();
+
+    },150);
+
+}
+
+
+/* =====================================================
+   NORMALIZE TEXT
+===================================================== */
+
+function normalizeText(text){
+
+    return String(text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[?？!！.,،؛;:]/g," ")
+        .replace(/\s+/g," ");
+
+}
+
+
+/* =====================================================
+   FIND FIREBASE ANSWER
+===================================================== */
+
+function findFirebaseAnswer(question){
+
+    const q = normalizeText(question);
+
+    if(!q || !lessons.length){
+
+        return null;
+
+    }
+
+    /*
+       1. Exact match
+    */
+
+    for(const item of lessons){
+
+        const fq =
+            normalizeText(item.question);
+
+        if(fq && fq === q){
+
+            return item.answer;
+
+        }
+
+    }
+
+
+    /*
+       2. Question contains Firebase question
+    */
+
+    for(const item of lessons){
+
+        const fq =
+            normalizeText(item.question);
+
+        if(
+            fq &&
+            (
+                q.includes(fq) ||
+                fq.includes(q)
+            )
+        ){
+
+            return item.answer;
+
+        }
+
+    }
+
+
+    /*
+       3. Word matching
+    */
+
+    const words =
+        q
+        .split(" ")
+        .filter(word => word.length >= 3);
+
+    let best = null;
+    let bestScore = 0;
+
+    for(const item of lessons){
+
+        const fq =
+            normalizeText(item.question);
+
+        if(!fq) continue;
+
+        let score = 0;
+
+        words.forEach(word => {
+
+            if(fq.includes(word)){
+
+                score++;
+
+            }
+
+        });
+
+        if(score > bestScore){
+
+            bestScore = score;
+            best = item.answer;
+
+        }
+
+    }
+
+    if(bestScore > 0){
+
+        return best;
+
+    }
+
+    return null;
+
+}
+
+
+/* =====================================================
+   BASIC AL USTAD
+===================================================== */
+
+function basicUstadAnswer(question){
+
+    const q =
+        normalizeText(question);
+
+
+    /* JADU */
+
+    if(
+        q.includes("jadu") ||
+        q.includes("जादू") ||
+        q.includes("sihr") ||
+        q.includes("sihir")
+    ){
+
+        return "इस्लामी शिक्षा के अनुसार जादू (सिहर) करना और करवाना हराम है। इससे बचना चाहिए।";
+
+    }
+
+
+    /* NAMAZ */
+
+    if(
+        q.includes("namaz") ||
+        q.includes("नमाज़") ||
+        q.includes("नमाज़") ||
+        q.includes("نماز")
+    ){
+
+        return "नमाज़ Islam की महत्वपूर्ण इबादत है। नमाज़ के सही तरीके, अरकान और मसाइल किसी योग्य Islamic teacher या scholar से सीखना बेहतर है।";
+
+    }
+
+
+    /* ROZA */
+
+    if(
+        q.includes("roza") ||
+        q.includes("रोजा") ||
+        q.includes("रोज़ा") ||
+        q.includes("روزہ")
+    ){
+
+        return "रोज़ा Islam की महत्वपूर्ण इबादत है। रोज़े के विस्तृत मसाइल में अपने भरोसेमंद qualified Islamic scholar से जानकारी लेना बेहतर है।";
+
+    }
+
+
+    /* TAJWEED */
+
+    if(
+        q.includes("tajweed") ||
+        q.includes("तजवीद") ||
+        q.includes("tajwid")
+    ){
+
+        return "Tajweed Quran को सही pronunciation और rules के साथ पढ़ने का इल्म है। सही Tajweed सीखने के लिए योग्य शिक्षक से अभ्यास करना बेहतर है।";
+
+    }
+
+
+    /* QAIDA */
+
+    if(
+        q.includes("qaida") ||
+        q.includes("कायदा") ||
+        q.includes("क़ायदा")
+    ){
+
+        return "Noorani Qaida Arabic पढ़ने की शुरुआती किताब है। इसमें Arabic letters, हरकत, जोड़ और Quran पढ़ने की basic practice सिखाई जाती है।";
+
+    }
+
+
+    /* QURAN */
+
+    if(
+        q.includes("quran") ||
+        q.includes("कुरान") ||
+        q.includes("क़ुरआन") ||
+        q.includes("قرآن")
+    ){
+
+        return "Quran Allah की किताब है। इसे सही pronunciation और Tajweed के साथ पढ़ना और समझना चाहिए।";
+
+    }
+
+
+    /* WUDU */
+
+    if(
+        q.includes("wudu") ||
+        q.includes("wuzu") ||
+        q.includes("वजू") ||
+        q.includes("वुज़ू")
+    ){
+
+        return "वुज़ू नमाज़ जैसी इबादतों की तैयारी के लिए किया जाता है। वुज़ू के सही फराइज़ और तरीका अपने योग्य शिक्षक से सीखें।";
+
+    }
+
+
+    /* SALAM */
+
+    if(
+        q.includes("salam") ||
+        q.includes("सलाम")
+    ){
+
+        return "وعليكم السلام ورحمة الله وبركاته 🌙";
+
+    }
+
+
+    /* DEFAULT */
+
+    return "मैं Quran, Noorani Qaida, Tajweed, Namaz, Roza और basic Islamic learning से जुड़े सवालों में मदद कर सकता हूँ। अपना सवाल थोड़ा और स्पष्ट लिखें।";
+
+}
+
+
+/* =====================================================
+   ASK USTAD
+===================================================== */
+
+async function askUstad(){
+
+    const input =
+        document.getElementById("questionInput");
+
+    const question =
+        input.value.trim();
+
+    if(!question){
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    addMessage(
+        question,
+        "user"
+    );
+
+    input.value = "";
+
+
+    /*
+       पहले Firebase answer
+    */
+
+    let answer =
+        findFirebaseAnswer(question);
+
+
+    /*
+       अगर Firebase में answer नहीं मिला
+       तो basic Ustad answer
+    */
+
+    if(!answer){
+
+        answer =
+            basicUstadAnswer(question);
+
+    }
+
+
+    /*
+       थोड़ी delay ताकि chat natural लगे
+    */
+
+    setTimeout(() => {
+
+        addMessage(
+            answer,
+            "bot"
+        );
+
+    },300);
+
+}
+
+
+/* =====================================================
+   ADD MESSAGE
+===================================================== */
+
+function addMessage(text,type){
+
+    const chat =
+        document.getElementById("chat");
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message " + type;
+
+    message.textContent =
+        text;
+
+    chat.appendChild(message);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document
+    .getElementById("questionInput")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                event.preventDefault();
+
+                askUstad();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   VOICE INPUT
+===================================================== */
+
+function startVoice(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+
+        alert(
+            "इस browser में voice input available नहीं है।"
+        );
+
+        return;
+
+    }
+
+    const recognition =
+        new SpeechRecognition();
+
+    recognition.lang =
+        "hi-IN";
+
+    recognition.interimResults =
+        false;
+
+    recognition.maxAlternatives =
+        1;
+
+
+    recognition.onstart =
+        function(){
+
+            addMessage(
+                "🎙️ बोलिए, मैं सुन रहा हूँ...",
+                "bot"
+            );
+
+        };
+
+
+    recognition.onresult =
+        function(event){
+
+            const text =
+                event
+                .results[0][0]
+                .transcript;
+
+            document
+                .getElementById("questionInput")
+                .value = text;
+
+            askUstad();
+
+        };
+
+
+    recognition.onerror =
+        function(){
+
+            addMessage(
+                "Voice input में समस्या हुई। कृपया सवाल लिखकर पूछें।",
+                "bot"
+            );
+
+        };
+
+
+    recognition.start();
+
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+console.log(
+    "Noorani Qaida & Quran website started."
+);
+
+</script>
+
+</body>
+</html>
