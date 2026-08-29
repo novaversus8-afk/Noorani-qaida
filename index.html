@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Noorani Qaida • Quran • Juz Amma • Namaz • Roza • Hadith</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,"Noto Sans Devanagari",sans-serif;
+background:#f1f6f5;
+color:#172525
+}
+header{
+position:sticky;
+top:0;
+z-index:99;
+background:linear-gradient(135deg,#00695c,#00897b);
+color:#fff;
+padding:15px
+}
+.head{max-width:1200px;margin:auto}
+h1{margin:0;font-size:23px}
+nav{
+display:flex;
+gap:7px;
+overflow:auto;
+margin-top:12px
+}
+nav button{
+border:0;
+border-radius:20px;
+padding:9px 13px;
+white-space:nowrap;
+background:#ffffff20;
+color:#fff
+}
+nav button:hover{background:#fff;color:#00695c}
+.container{
+max-width:1200px;
+margin:auto;
+padding:15px 10px 70px
+}
+section.hidden{display:none}
+.hero,.card,.lesson,.ayah,.hadith{
+background:#fff;
+border-radius:16px;
+padding:18px;
+margin:13px 0;
+box-shadow:0 3px 15px #0000000c
+}
+.hero{text-align:center}
+.hero h2{color:#00695c}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:12px
+}
+.arabic{
+direction:rtl;
+font-family:"Amiri","Noto Naskh Arabic",serif;
+font-size:30px;
+line-height:2;
+text-align:right
+}
+.qaida-ar{
+font-size:39px;
+direction:rtl;
+font-family:"Amiri","Noto Naskh Arabic",serif;
+text-align:center;
+line-height:2
+}
+.hindi{font-size:16px;line-height:1.8}
+.english{font-size:15px;line-height:1.7;color:#536366}
+.btn{
+border:0;
+border-radius:10px;
+padding:10px 14px;
+margin:3px;
+background:#00695c;
+color:white;
+cursor:pointer
+}
+.btn2{background:#e3f3f0;color:#00695c}
+.orange{background:#ef8d00}
+.red{background:#c62828}
+input,select,textarea{
+font:inherit;
+padding:11px;
+border:1px solid #ccd8d8;
+border-radius:10px
+}
+.search{
+width:100%;
+margin:8px 0
+}
+.toolbar{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+align-items:center
+}
+.loading{
+padding:30px;
+text-align:center;
+color:#00695c
+}
+.error{
+padding:15px;
+background:#ffeded;
+color:#a11b1b;
+border-radius:10px
+}
+.surah-title{
+text-align:center;
+color:#00695c;
+margin:28px 0 10px
+}
+.ayah-number{
+display:inline-flex;
+width:30px;
+height:30px;
+border-radius:50%;
+background:#00695c;
+color:white;
+align-items:center;
+justify-content:center;
+font-size:12px
+}
+.teacher-head{
+background:linear-gradient(135deg,#512da8,#7e57c2);
+color:white;
+padding:18px;
+border-radius:15px 15px 0 0
+}
+.chat{
+height:360px;
+overflow:auto;
+padding:12px;
+background:#fafafa
+}
+.msg{
+max-width:90%;
+padding:11px 13px;
+margin:8px 0;
+border-radius:15px;
+line-height:1.6
+}
+.msg.user{
+margin-left:auto;
+background:#00695c;
+color:#fff
+}
+.msg.bot{
+background:#fff;
+border:1px solid #ddd
+}
+.chatbar{
+display:flex;
+gap:6px;
+padding:10px;
+background:#fff
+}
+.chatbar input{flex:1}
+.notice{
+padding:13px;
+border-left:4px solid #f0a000;
+background:#fff8df;
+border-radius:7px;
+line-height:1.6
+}
+footer{text-align:center;padding:25px;color:#718080}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="head">
+<h1>📖 Noorani Qaida & Quran</h1>
+<small>Qaida • Quran • Juz Amma • Namaz • Roza • Hadith • AI Ustad</small>
+
+<nav>
+<button onclick="openTab('home')">🏠 Home</button>
+<button onclick="openTab('qaida')">📚 Qaida</button>
+<button onclick="openTab('quran')">📖 Quran</button>
+<button onclick="openTab('juz')">🌙 Amma Para</button>
+<button onclick="openTab('namaz')">🕌 Namaz</button>
+<button onclick="openTab('roza')">🌙 Roza</button>
+<button onclick="openTab('hadith')">📜 Hadith</button>
+<button onclick="openTab('teacher')">🤖 AI Ustad</button>
+</nav>
+</div>
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home">
+
+<div class="hero">
+<h2>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
+
+<div class="arabic">
+الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+</div>
+
+<p>
+<b>हिंदी:</b>
+सब प्रशंसा अल्लाह के लिए है, जो सारे संसारों का पालनहार है।
+</p>
+
+<p>
+<b>English:</b>
+All praise is for Allah, Lord of all worlds.
+</p>
+
+<button class="btn" onclick="openTab('quran');loadSurah(1)">
+📖 Al-Fatiha से शुरू करें
+</button>
+
+<button class="btn btn2" onclick="openTab('qaida')">
+📚 Noorani Qaida
+</button>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>📚 Noorani Qaida</h3>
+<p>Arabic letters, Harakat, Madd, Sukoon, Shaddah और Tajweed practice.</p>
+<button class="btn" onclick="openTab('qaida')">Open</button>
+</div>
+
+<div class="card">
+<h3>📖 पूरा Quran</h3>
+<p>114 Surah Arabic text के साथ पढ़ें और audio सुनें।</p>
+<button class="btn" onclick="openTab('quran');loadSurah(1)">Open</button>
+</div>
+
+<div class="card">
+<h3>🌙 पूरा Amma Para</h3>
+<p>30वें Juz की सभी Surah एक साथ।</p>
+<button class="btn" onclick="openTab('juz');loadJuz()">Open</button>
+</div>
+
+<div class="card">
+<h3>🕌 Namaz</h3>
+<p>Namaz की basic step-by-step जानकारी।</p>
+<button class="btn" onclick="openTab('namaz')">Open</button>
+</div>
+
+<div class="card">
+<h3>🌙 Roza</h3>
+<p>Sehri, Iftar और रोज़े की basic जानकारी।</p>
+<button class="btn" onclick="openTab('roza')">Open</button>
+</div>
+
+<div class="card">
+<h3>📜 Hadith</h3>
+<p>Selected authentic Hadith learning section.</p>
+<button class="btn" onclick="openTab('hadith')">Open</button>
+</div>
+
+</div>
+
+<div class="notice">
+Quran की Arabic तिलावत को प्राथमिकता दें। Hindi और English translation समझने के लिए है।
+फ़िक़्ह या धार्मिक मसाइल के specific सवाल में योग्य आलिम/मुफ्ती से पुष्टि करें।
+</div>
+
+</section>
+
+
+<!-- QAIDA -->
+<section id="qaida" class="hidden">
+
+<div class="hero">
+<h2>📚 Noorani Qaida</h2>
+<p>Arabic + Hindi + English + Voice</p>
+</div>
+
+<div id="qaidaList"></div>
+
+</section>
+
+
+<!-- QURAN -->
+<section id="quran" class="hidden">
+
+<div class="hero">
+<h2>📖 Quran</h2>
+
+<input
+id="surahSearch"
+class="search"
+placeholder="Surah खोजें..."
+oninput="filterSurahs()">
+
+<div id="surahList"></div>
+
+<div class="toolbar">
+<button class="btn" onclick="loadSurah(1)">
+Al-Fatiha
+</button>
+
+<button class="btn btn2" onclick="showSurahList()">
+114 Surah
+</button>
+
+<button class="btn btn2" onclick="stopAll()">
+🔇 Stop
+</button>
+</div>
+</div>
+
+<div id="quranBox"></div>
+
+</section>
+
+
+<!-- JUZ -->
+<section id="juz" class="hidden">
+
+<div class="hero">
+<h2>🌙 Amma Para — 30वाँ Juz</h2>
+
+<p>
+Al-Fatiha के बाद Quran की अंतिम 37 Surah वाला 30वाँ Juz।
+</p>
+
+<button class="btn" onclick="loadJuz()">
+📖 पूरा Amma Para लोड करें
+</button>
+</div>
+
+<div id="juzBox"></div>
+
+</section>
+
+
+<!-- NAMAZ -->
+<section id="namaz" class="hidden">
+
+<div class="hero">
+<h2>🕌 Namaz</h2>
+<p>नमाज़ की basic learning guide</p>
+</div>
+
+<div class="card">
+<h3>1. Takbeer</h3>
+
+<div class="arabic">اللَّهُ أَكْبَرُ</div>
+
+<p class="hindi">
+<b>हिंदी:</b> अल्लाह सबसे बड़ा है।
+</p>
+
+<p class="english">
+<b>English:</b> Allah is the Greatest.
+</p>
+
+<button class="btn btn2"
+onclick="speak('Allahu Akbar','ar')">
+🔊 सुनें
+</button>
+</div>
+
+<div class="card">
+<h3>2. Surah Al-Fatiha</h3>
+
+<div class="arabic">
+الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>
+الرَّحْمَنِ الرَّحِيمِ<br>
+مَالِكِ يَوْمِ الدِّينِ<br>
+إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>
+اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>
+صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ<br>
+غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+</div>
+
+<button class="btn btn2"
+onclick="loadSurah(1);openTab('quran')">
+📖 पूरा Fatiha
+</button>
+</div>
+
+<div class="card">
+<h3>3. Ruku</h3>
+<div class="arabic">سُبْحَانَ رَبِّيَ الْعَظِيمِ</div>
+<p>Ruku में Allah की तस्बीह पढ़ी जाती है।</p>
+</div>
+
+<div class="card">
+<h3>4. Sajdah</h3>
+<div class="arabic">سُبْحَانَ رَبِّيَ الْأَعْلَى</div>
+<p>सजदे में Allah की तस्बीह पढ़ी जाती है।</p>
+</div>
+
+<div class="card">
+<h3>5. Tashahhud</h3>
+<div class="arabic">
+التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ
+</div>
+<p>
+Tashahhud की पूरी practice अपने qualified teacher से pronunciation के साथ सीखें।
+</p>
+</div>
+
+<div class="card">
+<h3>6. नमाज़ की पाँच फ़र्ज़ नमाज़ें</h3>
+<ul>
+<li>Fajr — फ़ज्र</li>
+<li>Dhuhr — ज़ुहर</li>
+<li>Asr — असर</li>
+<li>Maghrib — मग़रिब</li>
+<li>Isha — ईशा</li>
+</ul>
+</div>
+
+</section>
+
+
+<!-- ROZA -->
+<section id="roza" class="hidden">
+
+<div class="hero">
+<h2>🌙 Roza</h2>
+</div>
+
+<div class="card">
+<h3>रोज़ा क्या है?</h3>
+<p>
+रोज़ा सुबह सादिक से सूर्यास्त तक खाने-पीने और रोज़ा तोड़ने वाली चीज़ों से
+बचते हुए Allah की इबादत करना है।
+</p>
+<p class="english">
+<b>English:</b>
+Fasting means abstaining from things that invalidate the fast from dawn until sunset while worshipping Allah.
+</p>
+</div>
+
+<div class="card">
+<h3>🌅 Sehri</h3>
+<p>
+सेहरी करना सुन्नत है। अपने स्थानीय Fajr timetable के अनुसार सेहरी का समय तय करें।
+</p>
+</div>
+
+<div class="card">
+<h3>🌇 Iftar</h3>
+<p>
+सूरज डूबने के बाद रोज़ा इफ्तार किया जाता है।
+</p>
+
+<div class="arabic">
+اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ
+</div>
+
+<p>
+दुआ के शब्दों की अलग-अलग मशहूर रिवायतें मिलती हैं; अपने स्थानीय आलिम से पुष्टि करें।
+</p>
+</div>
+
+<div class="card">
+<h3>⚠️ रोज़े के मसाइल</h3>
+<p>
+रोज़ा किन चीज़ों से टूटता है या नहीं टूटता, इसके detailed फ़िक़्ही मसाइल
+मस्लक के अनुसार अलग हो सकते हैं। Specific situation में qualified Mufti/Aalim से पूछें।
+</p>
+</div>
+
+</section>
+
+
+<!-- HADITH -->
+<section id="hadith" class="hidden">
+
+<div class="hero">
+<h2>📜 Hadith Learning</h2>
+<p>चुनी हुई हदीसें — Arabic + Hindi + English</p>
+</div>
+
+<div class="hadith">
+<h3>1. Actions and Intentions</h3>
+
+<div class="arabic">
+إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ
+</div>
+
+<p class="hindi">
+<b>हिंदी:</b>
+आमाल का दारोमदार नियतों पर है।
+</p>
+
+<p class="english">
+<b>English:</b>
+Actions are judged by intentions.
+</p>
+
+<p>
+<b>Reference:</b> Sahih al-Bukhari, Sahih Muslim.
+</p>
+
+<button class="btn btn2"
+onclick="speak('Actions are judged by intentions','en')">
+🔊 सुनें
+</button>
+</div>
+
+<div class="hadith">
+<h3>2. Muslim Character</h3>
+
+<div class="arabic">
+الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ
+</div>
+
+<p class="hindi">
+<b>हिंदी:</b>
+मुसलमान वह है जिसकी ज़बान और हाथ से दूसरे मुसलमान सुरक्षित रहें।
+</p>
+
+<p class="english">
+<b>English:</b>
+A Muslim is one from whose tongue and hand other Muslims are safe.
+</p>
+
+<p>
+<b>Reference:</b> Sahih al-Bukhari, Sahih Muslim.
+</p>
+</div>
+
+<div class="hadith">
+<h3>3. Mercy</h3>
+
+<p class="hindi">
+लोगों पर रहम करने वाले पर Allah रहम करता है।
+</p>
+
+<p class="english">
+Allah shows mercy to those who show mercy to people.
+</p>
+
+<p>
+<b>Reference:</b> Jami' at-Tirmidhi.
+</p>
+</div>
+
+<div class="notice">
+Hadith को share करने से पहले उसका exact Arabic, reference और grading
+विश्वसनीय Hadith source/qualified scholar से verify करना बेहतर है।
+</div>
+
+</section>
+
+
+<!-- AI TEACHER -->
+<section id="teacher" class="hidden">
+
+<div class="hero">
+<h2>🤖 Noorani AI Ustad</h2>
+<p>Qaida, Tajweed, Quran, Namaz और Roza के basic सवाल पूछें।</p>
+</div>
+
+<div class="card">
+
+<div class="teacher-head">
+<h3>AI Ustad</h3>
+<p>Hindi • English • Arabic</p>
+</div>
+
+<div class="toolbar" style="padding:10px">
+
+<select id="voiceSelect">
+<option value="">Automatic Voice</option>
+</select>
+
+<button class="btn btn2" onclick="testVoice()">
+🔊 Test
+</button>
+
+<button class="btn red" onclick="stopAll()">
+Stop
+</button>
+
+</div>
+
+<div id="chat" class="chat">
+
+<div class="msg bot">
+<b>Assalamu Alaikum!</b><br>
+मैं Noorani Qaida AI Ustad हूँ।<br><br>
+आप पूछ सकते हैं:<br>
+Alif क्या है?<br>
+Madd क्या है?<br>
+Tajweed क्या है?<br>
+Namaz कैसे सीखें?<br>
+Roza क्या है?
+</div>
+
+</div>
+
+<div class="chatbar">
+<input
+id="question"
+placeholder="अपना सवाल लिखें..."
+onkeydown="if(event.key==='Enter')askTeacher()">
+
+<button class="btn orange" onclick="askTeacher()">➤</button>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+© 2026 Noorani Qaida & Quran Learning
+</footer>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const API="https://api.alquran.cloud/v1";
+
+const ARABIC_EDITION="quran-uthmani";
+
+const ENGLISH_EDITION="en.sahih";
+
+let HINDI_EDITION=null;
+
+let currentAudio=null;
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openTab(id){
+
+document.querySelectorAll("section").forEach(x=>{
+x.classList.add("hidden");
+});
+
+document.getElementById(id).classList.remove("hidden");
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+if(id==="quran"){
+showSurahList();
+}
+}
+
+
+/* =========================================================
+   QAIDA
+========================================================= */
+
+const qaida=[
+
+["1. Arabic Letters",
+"ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن و ه ء ي",
+"अरबी के मूल अक्षरों को पहचानना सीखें।",
+"Learn the Arabic letters and their shapes."],
+
+["2. Fatha",
+"اَ بَ تَ ثَ جَ حَ خَ",
+"ज़बर/Fatha ऊपर लगती है और short vowel sound देती है।",
+"Fatha is the short vowel mark placed above a letter."],
+
+["3. Kasra",
+"اِ بِ تِ ثِ جِ حِ خِ",
+"ज़ेर/Kasra अक्षर के नीचे लगती है।",
+"Kasra is the short vowel mark placed below a letter."],
+
+["4. Damma",
+"اُ بُ تُ ثُ جُ حُ خُ",
+"पेश/Damma ऊपर लगती है।",
+"Damma is the short vowel mark placed above a letter."],
+
+["5. Tanween",
+"اً ٍ ٌ",
+"दो ज़बर, दो ज़ेर और दो पेश को Tanween कहते हैं।",
+"The double vowel marks are called Tanween."],
+
+["6. Sukoon",
+"اَبْ اَتْ اَجْ اَحْ",
+"Sukoon बताता है कि अक्षर पर vowel नहीं है।",
+"Sukoon indicates the absence of a vowel."],
+
+["7. Shaddah",
+"اَبَّ اَتَّ اَجَّ",
+"Shaddah अक्षर के doubling को दिखाती है।",
+"Shaddah indicates a doubled consonant."],
+
+["8. Madd",
+"بَا بِي بُو",
+"Madd में आवाज़ निर्धारित मात्रा तक लंबी होती है।",
+"Madd indicates lengthening of the sound."],
+
+["9. Qalqalah",
+"قْ طْ بْ جْ دْ",
+"Qalqalah के commonly taught letters: ق ط ب ج د",
+"The commonly taught Qalqalah letters are Qaf, Ta, Ba, Jim and Dal."],
+
+["10. Noon Saakin",
+"مِنْ أَنْ عَنْ",
+"Noon Saakin के Tajweed rules सीखें।",
+"Learn the Tajweed rules of Noon Saakin."],
+
+["11. Meem Saakin",
+"هُمْ كُمْ عَلَيْهِمْ",
+"Meem Saakin के Tajweed rules की practice करें।",
+"Practice the Tajweed rules of Meem Saakin."],
+
+["12. Ghunnah",
+"إِنَّ ثُمَّ أَنَّ",
+"Ghunnah एक nasal sound है।",
+"Ghunnah is a nasal sound."],
+
+["13. Ikhfa",
+"مِنْ شَرِّ",
+"Ikhfa को qualified teacher से सुनकर सही pronunciation सीखें।",
+"Learn correct Ikhfa pronunciation from a qualified teacher."],
+
+["14. Idgham",
+"مَنْ يَقُولُ",
+"Idgham में कुछ sounds merge होते हैं।",
+"Idgham involves merging in specific Tajweed cases."],
+
+["15. Iqlab",
+"مِنْ بَعْدِ",
+"Iqlab एक specific Noon Saakin/Tanween rule है।",
+"Iqlab is a specific Noon Saakin/Tanween rule."],
+
+["16. Waqf",
+"الْعَالَمِينَ ۝",
+"Quran पढ़ते समय रुकने के rules सीखें।",
+"Learn the rules and signs of stopping."],
+
+["17. Practice",
+"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+"धीरे और साफ़ pronunciation के साथ practice करें।",
+"Practice slowly with clear pronunciation."]
+];
+
+
+function renderQaida(){
+
+document.getElementById("qaidaList").innerHTML=
+
+qaida.map((x,i)=>`
+
+<div class="lesson">
+
+<h3>${x[0]}</h3>
+
+<div class="qaida-ar">
+${x[1]}
+</div>
+
+<p class="hindi">
+<b>हिंदी:</b> ${x[2]}
+</p>
+
+<p class="english">
+<b>English:</b> ${x[3]}
+</p>
+
+<button class="btn btn2"
+onclick="speak(${JSON.stringify(x[1])},'ar')">
+🔊 Arabic
+</button>
+
+<button class="btn btn2"
+onclick="speak(${JSON.stringify(x[2])},'hi')">
+🔊 Hindi
+</button>
+
+<button class="btn btn2"
+onclick="speak(${JSON.stringify(x[3])},'en')">
+🔊 English
+</button>
+
+</div>
+`).join("");
+}
+
+renderQaida();
+
+
+/* =========================================================
+   SURAH LIST
+========================================================= */
+
+let allSurahs=[];
+
+async function showSurahList(){
+
+if(allSurahs.length){
+
+renderSurahList();
+return;
+}
+
+const box=document.getElementById("surahList");
+
+box.innerHTML=
+`<div class="loading">📖 Surah list loading...</div>`;
+
+try{
+
+const r=await fetch(`${API}/surah`);
+
+const j=await r.json();
+
+allSurahs=j.data||[];
+
+renderSurahList();
+
+}catch(e){
+
+box.innerHTML=
+`<div class="error">Surah list load नहीं हुई।</div>`;
+}
+}
+
+
+function renderSurahList(){
+
+const q=
+(document.getElementById("surahSearch")?.value||"")
+.toLowerCase();
+
+const list=
+allSurahs.filter(s=>
+String(s.number).includes(q)||
+s.name.toLowerCase().includes(q)||
+s.englishName.toLowerCase().includes(q)
+);
+
+document.getElementById("surahList").innerHTML=
+
+list.map(s=>`
+
+<button
+class="btn btn2"
+onclick="loadSurah(${s.number})">
+${s.number}. ${escapeHTML(s.englishName)}
+</button>
+
+`).join("");
+}
+
+
+function filterSurahs(){
+renderSurahList();
+}
+
+
+/* =========================================================
+   LOAD SURAH
+========================================================= */
+
+async function loadSurah(number){
+
+openTab("quran");
+
+const box=document.getElementById("quranBox");
+
+box.innerHTML=
+`<div class="loading">
+📖 Surah ${number} loading...
+</div>`;
+
+try{
+
+const url=
+`${API}/surah/${number}/editions/${ARABIC_EDITION},${ENGLISH_EDITION}`;
+
+const r=await fetch(url);
+
+if(!r.ok)throw new Error("API error");
+
+const j=await r.json();
+
+const data=j.data||[];
+
+const ar=data.find(
+x=>x.edition.language==="ar"
+);
+
+const en=data.find(
+x=>x.edition.language==="en"
+);
+
+if(!ar)throw new Error("Arabic unavailable");
+
+let html=`
+
+<div class="hero">
+
+<h2>
+${escapeHTML(ar.surah.englishName)}
+</h2>
+
+<p>
+${escapeHTML(ar.surah.name)}
+</p>
+
+<p>
+${escapeHTML(ar.surah.englishNameTranslation)}
+</p>
+
+</div>
+`;
+
+ar.ayahs.forEach((a,i)=>{
+
+const et=en?.ayahs?.[i]?.text||"";
+
+html+=`
+
+<div class="ayah">
+
+<div class="ayah-number">
+${a.numberInSurah}
+</div>
+
+<div class="arabic">
+${a.text}
+</div>
+
+<hr>
+
+<p class="english">
+<b>English:</b><br>
+${escapeHTML(et)}
+</p>
+
+<div>
+
+<button
+class="btn btn2"
+onclick="playAyah(${a.number})">
+🔊 Tilawat
+</button>
+
+<button
+class="btn btn2"
+onclick="speak(${JSON.stringify(et)},'en')">
+🔊 English
+</button>
+
+</div>
+
+</div>
+`;
+});
+
+box.innerHTML=html;
+
+}catch(e){
+
+console.error(e);
+
+box.innerHTML=
+`<div class="error">
+Quran load नहीं हुआ। Internet check करके दोबारा कोशिश करें।
+</div>`;
+}
+}
+
+
+/* =========================================================
+   JUZ AMMA
+========================================================= */
+
+async function loadJuz(){
+
+openTab("juz");
+
+const box=document.getElementById("juzBox");
+
+box.innerHTML=
+`<div class="loading">
+🌙 पूरा 30वाँ पारा loading...
+</div>`;
+
+try{
+
+const url=
+`${API}/juz/30/editions/${ARABIC_EDITION},${ENGLISH_EDITION}`;
+
+const r=await fetch(url);
+
+if(!r.ok)throw new Error("Juz API error");
+
+const j=await r.json();
+
+const data=j.data||[];
+
+const ar=data.find(
+x=>x.edition.language==="ar"
+);
+
+const en=data.find(
+x=>x.edition.language==="en"
+);
+
+let html="";
+
+let lastSurah=0;
+
+ar.ayahs.forEach((a,i)=>{
+
+if(a.surah.number!==lastSurah){
+
+html+=`
+
+<div class="surah-title">
+
+<h2>
+${escapeHTML(a.surah.englishName)}
+</h2>
+
+<p>
+${escapeHTML(a.surah.name)}
+</p>
+
+<p>
+${escapeHTML(a.surah.englishNameTranslation)}
+</p>
+
+</div>
+`;
+
+lastSurah=a.surah.number;
+}
+
+const et=en?.ayahs?.[i]?.text||"";
+
+html+=`
+
+<div class="ayah">
+
+<div class="ayah-number">
+${a.numberInSurah}
+</div>
+
+<div class="arabic">
+${a.text}
+</div>
+
+<hr>
+
+<p class="english">
+<b>English:</b><br>
+${escapeHTML(et)}
+</p>
+
+<button class="btn btn2"
+onclick="playAyah(${a.number})">
+🔊 Tilawat
+</button>
+
+</div>
+`;
+});
+
+box.innerHTML=html;
+
+}catch(e){
+
+console.error(e);
+
+box.innerHTML=
+`<div class="error">
+Amma Para load नहीं हुआ। Internet connection check करें।
+</div>`;
+}
+}
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+function playAyah(number){
+
+stopAll();
+
+const url=
+`https://cdn.islamic.network/quran/audio/128/ar.alafasy/${number}.mp3`;
+
+currentAudio=new Audio(url);
+
+currentAudio.play().catch(()=>{
+alert("Audio play नहीं हुआ। फिर कोशिश करें।");
+});
+}
+
+
+/* =========================================================
+   VOICE
+========================================================= */
+
+const synth=window.speechSynthesis;
+
+function loadVoices(){
+
+const select=document.getElementById("voiceSelect");
+
+const voices=synth.getVoices();
+
+select.innerHTML=
+`<option value="">Automatic Voice</option>`;
+
+voices.forEach((v,i)=>{
+
+const op=document.createElement("option");
+
+op.value=i;
+
+op.textContent=
+`${v.name} — ${v.lang}`;
+
+select.appendChild(op);
+});
+}
+
+loadVoices();
+
+if("onvoiceschanged" in speechSynthesis){
+speechSynthesis.onvoiceschanged=loadVoices;
+}
+
+
+function findVoice(lang){
+
+const voices=synth.getVoices();
+
+let prefix=
+lang==="hi"?"hi":
+lang==="ar"?"ar":
+"en";
+
+return voices.find(
+v=>v.lang.toLowerCase().startsWith(prefix)
+)||voices[0];
+}
+
+
+function speak(text,lang="hi"){
+
+if(!text)return;
+
+if(currentAudio){
+currentAudio.pause();
+currentAudio=null;
+}
+
+synth.cancel();
+
+const u=
+new SpeechSynthesisUtterance(text);
+
+const selected=
+document.getElementById("voiceSelect").value;
+
+const voices=synth.getVoices();
+
+if(selected!==""){
+u.voice=voices[Number(selected)];
+}else{
+u.voice=findVoice(lang);
+}
+
+u.lang=
+lang==="hi"?"hi-IN":
+lang==="ar"?"ar-SA":
+"en-US";
+
+u.rate=.86;
+u.pitch=1;
+
+synth.speak(u);
+}
+
+
+function stopAll(){
+
+synth.cancel();
+
+if(currentAudio){
+currentAudio.pause();
+currentAudio.currentTime=0;
+currentAudio=null;
+}
+}
+
+
+function testVoice(){
+
+speak(
+"Assalamu Alaikum. Main Noorani Qaida AI Ustad hoon.",
+"hi"
+);
+}
+
+
+/* =========================================================
+   AI USTAD
+========================================================= */
+
+const knowledge=[
+
+{
+keys:["alif","अलिफ","الف"],
+ans:"Alif (ا) Arabic alphabet का पहला अक्षर है। इसे सही makhraj और pronunciation के साथ qualified teacher से सीखें।"
+},
+
+{
+keys:["madd","मद्द","مد"],
+ans:"Madd का अर्थ आवाज़ को निर्धारित मात्रा तक लंबा करना है। Madd के कई प्रकार होते हैं।"
+},
+
+{
+keys:["sukoon","सुकून","سكون"],
+ans:"Sukoon (ْ) बताता है कि अक्षर पर vowel नहीं है।"
+},
+
+{
+keys:["shaddah","शद्दा","شدة"],
+ans:"Shaddah (ّ) अक्षर की doubling को दर्शाती है।"
+},
+
+{
+keys:["tajweed","तजवीद","تجويد"],
+ans:"Tajweed Quran को सही makhraj, sifat और recitation rules के साथ पढ़ने का ज्ञान है।"
+},
+
+{
+keys:["qalqalah","कलकल","قلقلة"],
+ans:"Qalqalah के commonly taught letters ق ط ب ج د हैं।"
+},
+
+{
+keys:["ghunnah","गुन्नाह","غنة"],
+ans:"Ghunnah एक nasal sound है जो कुछ Tajweed situations में आती है।"
+},
+
+{
+keys:["namaz","नमाज़","नमाज","salah"],
+ans:"Namaz Islam की महत्वपूर्ण इबादत है। इसकी पूरी विधि qualified teacher से practical रूप में सीखना बेहतर है।"
+},
+
+{
+keys:["roza","रोज़ा","रोजा","fast"],
+ans:"Roza dawn से sunset तक रोज़ा तोड़ने वाली चीज़ों से बचकर Allah की इबादत करना है। Detailed मसाइल के लिए qualified Mufti/Aalim से पूछें।"
+},
+
+{
+keys:["fatiha","फातिहा","الفاتحة"],
+ans:"Al-Fatiha Quran की पहली Surah है। इसमें Allah की प्रशंसा और सीधे रास्ते की हिदायत की दुआ है।"
+},
+
+{
+keys:["quran","कुरान","क़ुरआन"],
+ans:"Quran Allah की किताब है। Arabic text को सही pronunciation और Tajweed के साथ पढ़ना सीखें।"
+}
+
+];
+
+
+function teacherAnswer(q){
+
+const s=q.toLowerCase();
+
+for(const item of knowledge){
+
+for(const key of item.keys){
+
+if(s.includes(key.toLowerCase())){
+return item.ans;
+}
+}
+}
+
+return `
+आपका सवाल मुझे पूरी तरह स्पष्ट नहीं हुआ।
+Noorani Qaida, Tajweed, Quran, Namaz या Roza से जुड़ा
+specific सवाल लिखें। फ़िक़्ही/फतवा वाले सवाल में qualified
+Aalim/Mufti से पुष्टि करें।
+`;
+}
+
+
+function addChat(text,type){
+
+const chat=document.getElementById("chat");
+
+const d=document.createElement("div");
+
+d.className="msg "+type;
+
+d.innerHTML=
+escapeHTML(text).replace(/\n/g,"<br>");
+
+chat.appendChild(d);
+
+chat.scrollTop=chat.scrollHeight;
+}
+
+
+function askTeacher(){
+
+const input=document.getElementById("question");
+
+const q=input.value.trim();
+
+if(!q)return;
+
+addChat(q,"user");
+
+input.value="";
+
+setTimeout(()=>{
+
+const ans=teacherAnswer(q);
+
+addChat(ans,"bot");
+
+speak(ans,"hi");
+
+},300);
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHTML(s){
+
+return String(s)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+openTab("home");
+
+</script>
+
+</body>
+</html>
